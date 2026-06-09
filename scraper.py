@@ -572,6 +572,13 @@ body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
 #no-btn{{border:1.5px solid #e5e7eb;border-radius:8px;padding:.38rem .8rem;font-size:.81rem;cursor:pointer;background:#f9fafb;color:#374151;transition:all .15s;white-space:nowrap;user-select:none;line-height:1}}
 #no-btn.on{{background:#dcfce7;border-color:#86efac;color:#166534;font-weight:600}}
 #cl{{font-size:.76rem;color:#9ca3af;margin-left:auto;background:#f1f5f9;padding:.3rem .7rem;border-radius:20px;white-space:nowrap}}
+@media(max-width:600px){{
+  .fb{{padding:.75rem 1rem .6rem}}
+  .fb-bot{{display:grid;grid-template-columns:1fr 1fr;gap:.4rem}}
+  .fb select,#no-btn{{width:100%;box-sizing:border-box}}
+  #inf{{grid-column:1/-1}}
+  #cl{{grid-column:1/-1;margin-left:0;text-align:center}}
+}}
 
 /* ── Job list ── */
 .grid{{max-width:860px;margin:1.5rem auto;padding:0 1.5rem 4rem;display:flex;flex-direction:column;gap:1rem}}
