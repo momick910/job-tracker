@@ -560,12 +560,18 @@ body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
 @media(max-width:620px){{.hi{{flex-direction:column;align-items:flex-start;gap:1.5rem}}.hs{{width:100%}}.hsi{{flex:1}}}}
 
 /* ── Filter bar ── */
-.fb{{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid #e5e7eb;padding:.6rem 1.5rem;display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;box-shadow:0 1px 3px rgba(0,0,0,.07)}}
-.fb input,.fb select{{border:1px solid #d1d5db;border-radius:5px;padding:.35rem .65rem;font-size:.84rem;outline:none;background:#f9fafb;color:#111827;transition:border-color .15s,box-shadow .15s}}
-.fb input:focus,.fb select:focus{{border-color:#3b82f6;background:#fff;box-shadow:0 0 0 3px rgba(59,130,246,.12)}}
-#search{{flex:1;min-width:160px}}
-.fb label{{display:flex;align-items:center;gap:.3rem;font-size:.84rem;cursor:pointer;color:#374151;white-space:nowrap}}
-#cl{{font-size:.8rem;color:#9ca3af;margin-left:auto;white-space:nowrap}}
+.fb{{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid #e5e7eb;padding:1rem 1.5rem .8rem;box-shadow:0 2px 10px rgba(0,0,0,.06);display:flex;flex-direction:column;gap:.65rem}}
+.fb-top{{display:flex;align-items:center}}
+.fb-bot{{display:flex;align-items:center;gap:.45rem;flex-wrap:wrap}}
+.si{{position:relative;width:100%}}
+.si svg{{position:absolute;left:.8rem;top:50%;transform:translateY(-50%);pointer-events:none}}
+#search{{width:100%;box-sizing:border-box;border:1.5px solid #e5e7eb;border-radius:10px;padding:.55rem .9rem .55rem 2.4rem;font-size:.9rem;outline:none;background:#f9fafb;color:#111827;transition:border-color .15s,box-shadow .15s}}
+#search:focus{{border-color:#3b82f6;background:#fff;box-shadow:0 0 0 3px rgba(59,130,246,.1)}}
+.fb select{{border:1.5px solid #e5e7eb;border-radius:8px;padding:.38rem 1.8rem .38rem .65rem;font-size:.81rem;outline:none;background:#f9fafb url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%239ca3af' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E") no-repeat right .6rem center;color:#374151;cursor:pointer;appearance:none;-webkit-appearance:none;transition:border-color .15s,background-color .15s}}
+.fb select:focus{{border-color:#3b82f6;background-color:#fff;box-shadow:0 0 0 3px rgba(59,130,246,.1)}}
+#no-btn{{border:1.5px solid #e5e7eb;border-radius:8px;padding:.38rem .8rem;font-size:.81rem;cursor:pointer;background:#f9fafb;color:#374151;transition:all .15s;white-space:nowrap;user-select:none;line-height:1}}
+#no-btn.on{{background:#dcfce7;border-color:#86efac;color:#166534;font-weight:600}}
+#cl{{font-size:.76rem;color:#9ca3af;margin-left:auto;background:#f1f5f9;padding:.3rem .7rem;border-radius:20px;white-space:nowrap}}
 
 /* ── Job list ── */
 .grid{{max-width:860px;margin:1.5rem auto;padding:0 1.5rem 4rem;display:flex;flex-direction:column;gap:1rem}}
@@ -630,39 +636,51 @@ body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
   </div>
 </header>
 <div class="fb">
-  <input type="search" id="search" placeholder="Search title, institution..." oninput="af()">
-  <select id="sf" onchange="af()">
-    <option value="">All sources</option>
-    {source_opts}
-  </select>
-  <select id="lf" onchange="af()">
-    <option value="">All levels</option>
-    {level_opts}
-  </select>
-  <select id="inf" onchange="af()">
-    <option value="">All institutions</option>
-    {inst_opts}
-  </select>
-  <select id="so" onchange="af()">
-    <option value="">Sort: default</option>
-    <option value="deadline">Sort: deadline</option>
-    <option value="institution">Sort: institution</option>
-    <option value="title">Sort: title</option>
-  </select>
-  <label><input type="checkbox" id="no" onchange="af()"> New only</label>
-  <span id="cl">Showing {total} jobs</span>
+  <div class="fb-top">
+    <div class="si">
+      <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="6.5" cy="6.5" r="4.5" stroke="#9ca3af" stroke-width="1.4"/><path d="m10 10 2.5 2.5" stroke="#9ca3af" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <input type="search" id="search" placeholder="Search title, institution, department…" oninput="af()">
+    </div>
+  </div>
+  <div class="fb-bot">
+    <select id="sf" onchange="af()">
+      <option value="">All sources</option>
+      {source_opts}
+    </select>
+    <select id="lf" onchange="af()">
+      <option value="">All levels</option>
+      {level_opts}
+    </select>
+    <select id="inf" onchange="af()">
+      <option value="">All institutions</option>
+      {inst_opts}
+    </select>
+    <select id="so" onchange="af()">
+      <option value="">Sort: default</option>
+      <option value="deadline">Sort: deadline ↑</option>
+      <option value="institution">Sort: institution</option>
+      <option value="title">Sort: title</option>
+    </select>
+    <button id="no-btn" onclick="toggleNew()">✦ New only</button>
+    <span id="cl">Showing {total} jobs</span>
+  </div>
 </div>
 <div class="grid" id="grid">
 {cards_html}
 </div>
 <script>
+function toggleNew(){{
+  var btn=document.getElementById('no-btn');
+  btn.classList.toggle('on');
+  af();
+}}
 function af(){{
   var q=document.getElementById('search').value.toLowerCase();
   var src=document.getElementById('sf').value;
   var lvl=document.getElementById('lf').value;
   var inst=document.getElementById('inf').value;
   var srt=document.getElementById('so').value;
-  var nw=document.getElementById('no').checked;
+  var nw=document.getElementById('no-btn').classList.contains('on');
   var g=document.getElementById('grid');
   var all=Array.from(g.querySelectorAll('.jc'));
   var vis=all.filter(function(c){{
@@ -701,70 +719,41 @@ def _build_email_html(new_jobs: list, has_new: bool, preheader: str, date_str: s
         for j in new_jobs:
             title    = esc(j.get("title", ""))
             inst     = esc(j.get("institution", ""))
-            deadline = j.get("deadline", "")
+            deadline = esc(j.get("deadline", "") or "—")
             url      = esc(j.get("url", "#"))
-            meta     = inst + (f" · Deadline: {esc(deadline)}" if deadline else "")
             rows.append(
-                f'<div class="job">'
-                f'<p class="jt">{title}</p>'
-                f'<p class="jm">{meta}</p>'
-                f'<a class="ab" href="{url}">Apply →</a>'
-                f'</div>'
+                f'<tr>'
+                f'<td style="padding:8px;border-bottom:1px solid #eee;">{title}</td>'
+                f'<td style="padding:8px;border-bottom:1px solid #eee;">{inst}</td>'
+                f'<td style="padding:8px;border-bottom:1px solid #eee;">{deadline}</td>'
+                f'<td style="padding:8px;border-bottom:1px solid #eee;"><a href="{url}" style="color:#111;">Apply</a></td>'
+                f'</tr>'
             )
-        body = (
-            f'<div class="card">'
-            f'<p class="label">{len(new_jobs)} New Position{"s" if len(new_jobs) != 1 else ""}</p>'
+        content = (
+            f'<h2 style="color:#111;">{len(new_jobs)} New EU Jobs · {esc(date_str)}</h2>'
+            f'<table width="100%" cellpadding="8" cellspacing="0" border="0">'
+            f'<tr style="background:#f5f5f5;">'
+            f'<th align="left">Title</th><th align="left">Institution</th>'
+            f'<th align="left">Deadline</th><th align="left">Apply</th>'
+            f'</tr>'
             + "".join(rows)
-            + "</div>"
+            + "</table>"
         )
     else:
-        body = (
-            '<div class="card" style="text-align:center;padding:40px 28px">'
-            '<p style="font-size:2rem;margin:0 0 14px">🌟</p>'
-            '<p style="font-size:1rem;font-weight:600;color:#0f172a;margin:0 0 10px">Nothing new today</p>'
-            '<p style="font-size:.88rem;color:#64748b;margin:0;line-height:1.65">'
-            "Nothing new on the EU job market today — but great things are coming.<br>"
-            "Keep going, you're doing amazing 🌟"
-            "</p>"
-            "</div>"
+        content = (
+            f'<h2 style="color:#111;">No New Jobs Today · {esc(date_str)}</h2>'
+            f'<p style="color:#555;">Nothing new on the EU job market today — but great things are coming. '
+            f'Keep going, you\'re doing amazing 🌟</p>'
         )
 
-    pad = "&nbsp;&zwnj;" * 40
-
-    return f"""<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>EU Job Tracker</title>
-<style>
-body{{margin:0;padding:0;background:#f1f5f9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,sans-serif}}
-.wrap{{max-width:560px;margin:0 auto;padding:24px 16px}}
-.hdr{{background:#003299;border-radius:12px;padding:22px 28px;text-align:center;margin-bottom:14px}}
-.hdr h1{{color:#fff;margin:0;font-size:1.2rem;letter-spacing:.04em;font-weight:700}}
-.hdr p{{color:#93c5fd;margin:5px 0 0;font-size:.8rem}}
-.card{{background:#fff;border-radius:12px;padding:22px 26px;margin-bottom:14px;box-shadow:0 1px 3px rgba(0,0,0,.07)}}
-.label{{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#64748b;margin:0 0 14px}}
-.job{{border-bottom:1px solid #f1f5f9;padding:13px 0}}
-.job:last-child{{border-bottom:none;padding-bottom:0}}
-.job:first-child{{padding-top:0}}
-.jt{{font-size:.95rem;font-weight:600;color:#0f172a;margin:0 0 3px}}
-.jm{{font-size:.78rem;color:#64748b;margin:0 0 9px}}
-.ab{{display:inline-block;background:#003299;color:#fff !important;text-decoration:none;padding:5px 12px;border-radius:6px;font-size:.76rem;font-weight:600}}
-.rb{{display:block;text-align:center;background:#0f172a;color:#fff !important;text-decoration:none;padding:12px 24px;border-radius:10px;font-size:.9rem;font-weight:600;margin-top:4px}}
-.ft{{text-align:center;font-size:.7rem;color:#94a3b8;margin-top:14px}}
-</style>
-</head>
-<body>
-<span style="display:none;max-height:0;overflow:hidden;font-size:1px;color:transparent">{esc(preheader)}{pad}</span>
-<div class="wrap">
-  <div class="hdr"><h1>EU Job Tracker</h1><p>{esc(date_str)}</p></div>
-  {body}
-  <a class="rb" href="{REPORT_URL}">View Full Report →</a>
-  <div class="ft">EU Job Tracker · automated daily scan</div>
-</div>
-</body>
-</html>"""
+    return (
+        f'<html><body style="font-family:Arial,sans-serif;background:#ffffff;padding:20px;">'
+        f'<div style="display:none;max-height:0;overflow:hidden;">{esc(preheader)}</div>'
+        f'{content}'
+        f'<br>'
+        f'<a href="{REPORT_URL}" style="background:#111;color:#fff;padding:12px 24px;text-decoration:none;border-radius:4px;">View Full Report</a>'
+        f'</body></html>'
+    )
 
 
 def send_email(jobs: list) -> None:
