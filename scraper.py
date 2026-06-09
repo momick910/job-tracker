@@ -714,44 +714,79 @@ function af(){{
 def _build_email_html(new_jobs: list, has_new: bool, preheader: str, date_str: str) -> str:
     esc = html.escape
 
+    HDR  = "background:#1a1a2e;border-radius:12px 12px 0 0;padding:28px 28px;text-align:center"
+    BODY = "background:#ffffff;padding:24px 28px;border-left:1px solid #e8e8e8;border-right:1px solid #e8e8e8"
+    FOOT = "background:#f8f6f2;border-radius:0 0 12px 12px;padding:22px 28px;text-align:center;border:1px solid #e8e8e8;border-top:none"
+    EYE  = "margin:0 0 5px;font-size:10px;letter-spacing:2px;color:#94a3b8;text-transform:uppercase;font-family:Arial,sans-serif"
+    H1   = "margin:0 0 5px;font-size:21px;color:#ffffff;font-family:Arial,sans-serif;font-weight:700"
+    SUB  = "margin:0;font-size:13px;color:#94a3b8;font-family:Arial,sans-serif"
+    CRD  = "margin-bottom:10px;background:#fffdf9;border:1px solid #ede8e0;border-radius:8px;padding:14px 16px"
+    TTL  = "margin:0 0 3px;font-size:14px;font-weight:700;color:#1a1a2e;font-family:Arial,sans-serif;line-height:1.4"
+    MTA  = "margin:0 0 9px;font-size:12px;color:#6b7280;font-family:Arial,sans-serif"
+    ABT  = "display:inline-block;background:#003299;color:#ffffff;text-decoration:none;padding:5px 14px;border-radius:5px;font-size:11px;font-weight:700;font-family:Arial,sans-serif"
+    RBT  = "display:inline-block;background:#1a1a2e;color:#ffffff;text-decoration:none;padding:12px 30px;border-radius:7px;font-size:14px;font-weight:700;font-family:Arial,sans-serif;letter-spacing:.3px"
+
     if has_new:
-        rows = []
-        for j in new_jobs:
-            title    = esc(j.get("title", ""))
-            inst     = esc(j.get("institution", ""))
-            deadline = esc(j.get("deadline", "") or "—")
-            url      = esc(j.get("url", "#"))
-            rows.append(
-                f'<tr>'
-                f'<td style="padding:8px;border-bottom:1px solid #eee;">{title}</td>'
-                f'<td style="padding:8px;border-bottom:1px solid #eee;">{inst}</td>'
-                f'<td style="padding:8px;border-bottom:1px solid #eee;">{deadline}</td>'
-                f'<td style="padding:8px;border-bottom:1px solid #eee;"><a href="{url}" style="color:#111;">Apply</a></td>'
-                f'</tr>'
+        shown    = new_jobs[:15]
+        overflow = len(new_jobs) - 15
+        cards    = []
+        for j in shown:
+            raw_title = j.get("title", "") or ""
+            t   = esc(raw_title[:80] + ("…" if len(raw_title) > 80 else ""))
+            inst = esc(j.get("institution", "") or "")
+            dl   = j.get("deadline", "") or ""
+            meta = inst + (f" · Deadline: {esc(dl)}" if dl else "")
+            url  = esc(j.get("url", "#"))
+            cards.append(
+                f'<div style="{CRD}">'
+                f'<p style="{TTL}">{t}</p>'
+                f'<p style="{MTA}">{meta}</p>'
+                f'<a href="{url}" style="{ABT}">Apply →</a>'
+                f'</div>'
             )
-        content = (
-            f'<h2 style="color:#111;">{len(new_jobs)} New EU Jobs · {esc(date_str)}</h2>'
-            f'<table width="100%" cellpadding="8" cellspacing="0" border="0">'
-            f'<tr style="background:#f5f5f5;">'
-            f'<th align="left">Title</th><th align="left">Institution</th>'
-            f'<th align="left">Deadline</th><th align="left">Apply</th>'
-            f'</tr>'
-            + "".join(rows)
-            + "</table>"
+        if overflow > 0:
+            cards.append(
+                f'<p style="margin:14px 0 0;font-size:13px;color:#6b7280;font-family:Arial,sans-serif;text-align:center">'
+                f'…and <strong>{overflow}</strong> more in the full report</p>'
+            )
+        n      = len(new_jobs)
+        header = (
+            f'<p style="{EYE}">EU Job Tracker</p>'
+            f'<h1 style="{H1}">{n} New EU Job{"s" if n != 1 else ""} Found</h1>'
+            f'<p style="{SUB}">{esc(date_str)}</p>'
         )
+        body = "".join(cards)
     else:
-        content = (
-            f'<h2 style="color:#111;">No New Jobs Today · {esc(date_str)}</h2>'
-            f'<p style="color:#555;">Nothing new on the EU job market today — but great things are coming. '
-            f'Keep going, you\'re doing amazing 🌟</p>'
+        header = (
+            f'<p style="{EYE}">EU Job Tracker</p>'
+            f'<h1 style="{H1}">Nothing New Today</h1>'
+            f'<p style="{SUB}">{esc(date_str)}</p>'
+        )
+        body = (
+            '<div style="background:#fdf8f3;border:1px solid #f0e6d8;border-radius:10px;padding:26px 22px;text-align:center">'
+            '<p style="margin:0 0 10px;font-size:26px">🌟</p>'
+            '<p style="margin:0 0 10px;font-size:15px;font-weight:700;color:#1a1a2e;font-family:Arial,sans-serif">Nothing new today, Alejandra</p>'
+            '<p style="margin:0;font-size:14px;color:#555555;font-family:Georgia,serif;line-height:1.75">'
+            "Nothing new on the EU job market today — but great things are on their way.<br>"
+            "Your persistence is building something real. Keep going, you&#39;re doing amazing 🌟"
+            "</p></div>"
         )
 
     return (
-        f'<html><body style="font-family:Arial,sans-serif;background:#ffffff;padding:20px;">'
-        f'<div style="display:none;max-height:0;overflow:hidden;">{esc(preheader)}</div>'
-        f'{content}'
-        f'<br>'
-        f'<a href="{REPORT_URL}" style="background:#111;color:#fff;padding:12px 24px;text-decoration:none;border-radius:4px;">View Full Report</a>'
+        f'<!DOCTYPE html><html><head><meta charset="UTF-8">'
+        f'<meta name="viewport" content="width=device-width,initial-scale=1"></head>'
+        f'<body style="margin:0;padding:0;background:#f4f1ec;font-family:Arial,sans-serif">'
+        f'<div style="display:none;max-height:0;overflow:hidden;color:#f4f1ec">{esc(preheader)}</div>'
+        f'<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f4f1ec">'
+        f'<tr><td align="center" style="padding:28px 16px">'
+        f'<table width="560" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;width:100%">'
+        f'<tr><td style="{HDR}">{header}</td></tr>'
+        f'<tr><td style="{BODY}">{body}</td></tr>'
+        f'<tr><td style="{FOOT}">'
+        f'<a href="{REPORT_URL}" style="{RBT}">View Full Report →</a>'
+        f'<p style="margin:12px 0 0;font-size:11px;color:#9ca3af;font-family:Arial,sans-serif">EU Job Tracker · automated daily scan</p>'
+        f'</td></tr>'
+        f'</table></td></tr></table>'
         f'</body></html>'
     )
 
@@ -774,13 +809,15 @@ def send_email(jobs: list) -> None:
     today     = datetime.now().strftime("%B %d, %Y")
 
     if has_new:
-        subject   = f"[{len(new_jobs)}] New Positions at EU Institutions · {today}"
+        subject   = f"[{len(new_jobs)}] New EU Jobs Found · {today}"
         preheader = ", ".join(j["title"] for j in new_jobs[:3])
     else:
         subject   = f"No New EU Jobs Today · {today}"
         preheader = "Nothing new today, but the full report is always available"
 
-    body = _build_email_html(new_jobs, has_new, preheader, today)
+    body      = _build_email_html(new_jobs, has_new, preheader, today)
+    body_bytes = len(body.encode("utf-8"))
+    print(f"  Email HTML size: {body_bytes / 1024:.1f} KB ({body_bytes:,} bytes)")
 
     msg = EmailMessage()
     msg["Subject"] = subject
