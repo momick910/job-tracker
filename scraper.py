@@ -8,20 +8,30 @@ import html
 import json
 import os
 import re
+import smtplib
 import time
 import webbrowser
 from collections import Counter
 from datetime import datetime, timezone
+from email.message import EmailMessage
+from email.utils import formataddr
 from pathlib import Path
 
 import requests
 from bs4 import BeautifulSoup
+
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 
 # ─── Config ───────────────────────────────────────────────────────────────────
 
 JOBS_FILE   = Path("jobs.json")
 REPORT_FILE = Path("report.html")
 EB_BASE     = "https://www.eurobrussels.com"
+REPORT_URL  = "https://momick910.github.io/job-tracker/report.html"
 
 HEADERS = {
     "User-Agent": (
@@ -540,7 +550,7 @@ body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
 .hl{{flex:1;min-width:0}}
 .hey{{font-size:.61rem;text-transform:uppercase;letter-spacing:.15em;color:#60a5fa;font-weight:700;margin-bottom:.55rem}}
 .hdr h1{{font-size:2.2rem;font-weight:800;color:#f8fafc;letter-spacing:-.04em;line-height:1;margin-bottom:.5rem}}
-.hint{{font-size:.9rem;color:#94a3b8;margin-bottom:.45rem;line-height:1.5}}
+.hint{{font-size:1.1rem;color:#94a3b8;margin-top:.9rem;padding-top:.9rem;border-top:1px solid rgba(148,163,184,.2);margin-bottom:.45rem;line-height:1.5}}
 .hme{{font-size:.78rem;color:#475569}}
 .hs{{display:flex;gap:1px;background:rgba(255,255,255,.06);border-radius:10px;overflow:hidden;flex-shrink:0;border:1px solid rgba(255,255,255,.07)}}
 .hsi{{padding:1.2rem 1.75rem;text-align:center;min-width:90px}}
@@ -681,6 +691,124 @@ function af(){{
     print(f"  Report saved → {REPORT_FILE.resolve()}")
 
 
+# ─── Email ────────────────────────────────────────────────────────────────────
+
+def _build_email_html(new_jobs: list, has_new: bool, preheader: str, date_str: str) -> str:
+    esc = html.escape
+
+    if has_new:
+        rows = []
+        for j in new_jobs:
+            title    = esc(j.get("title", ""))
+            inst     = esc(j.get("institution", ""))
+            deadline = j.get("deadline", "")
+            url      = esc(j.get("url", "#"))
+            meta     = inst + (f" · Deadline: {esc(deadline)}" if deadline else "")
+            rows.append(
+                f'<div class="job">'
+                f'<p class="jt">{title}</p>'
+                f'<p class="jm">{meta}</p>'
+                f'<a class="ab" href="{url}">Apply →</a>'
+                f'</div>'
+            )
+        body = (
+            f'<div class="card">'
+            f'<p class="label">{len(new_jobs)} New Position{"s" if len(new_jobs) != 1 else ""}</p>'
+            + "".join(rows)
+            + "</div>"
+        )
+    else:
+        body = (
+            '<div class="card" style="text-align:center;padding:40px 28px">'
+            '<p style="font-size:2rem;margin:0 0 14px">🌟</p>'
+            '<p style="font-size:1rem;font-weight:600;color:#0f172a;margin:0 0 10px">Nothing new today</p>'
+            '<p style="font-size:.88rem;color:#64748b;margin:0;line-height:1.65">'
+            "Nothing new on the EU job market today — but great things are coming.<br>"
+            "Keep going, you're doing amazing 🌟"
+            "</p>"
+            "</div>"
+        )
+
+    pad = "&nbsp;&zwnj;" * 40
+
+    return f"""<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EU Job Tracker</title>
+<style>
+body{{margin:0;padding:0;background:#f1f5f9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,sans-serif}}
+.wrap{{max-width:560px;margin:0 auto;padding:24px 16px}}
+.hdr{{background:#003299;border-radius:12px;padding:22px 28px;text-align:center;margin-bottom:14px}}
+.hdr h1{{color:#fff;margin:0;font-size:1.2rem;letter-spacing:.04em;font-weight:700}}
+.hdr p{{color:#93c5fd;margin:5px 0 0;font-size:.8rem}}
+.card{{background:#fff;border-radius:12px;padding:22px 26px;margin-bottom:14px;box-shadow:0 1px 3px rgba(0,0,0,.07)}}
+.label{{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#64748b;margin:0 0 14px}}
+.job{{border-bottom:1px solid #f1f5f9;padding:13px 0}}
+.job:last-child{{border-bottom:none;padding-bottom:0}}
+.job:first-child{{padding-top:0}}
+.jt{{font-size:.95rem;font-weight:600;color:#0f172a;margin:0 0 3px}}
+.jm{{font-size:.78rem;color:#64748b;margin:0 0 9px}}
+.ab{{display:inline-block;background:#003299;color:#fff !important;text-decoration:none;padding:5px 12px;border-radius:6px;font-size:.76rem;font-weight:600}}
+.rb{{display:block;text-align:center;background:#0f172a;color:#fff !important;text-decoration:none;padding:12px 24px;border-radius:10px;font-size:.9rem;font-weight:600;margin-top:4px}}
+.ft{{text-align:center;font-size:.7rem;color:#94a3b8;margin-top:14px}}
+</style>
+</head>
+<body>
+<span style="display:none;max-height:0;overflow:hidden;font-size:1px;color:transparent">{esc(preheader)}{pad}</span>
+<div class="wrap">
+  <div class="hdr"><h1>EU Job Tracker</h1><p>{esc(date_str)}</p></div>
+  {body}
+  <a class="rb" href="{REPORT_URL}">View Full Report →</a>
+  <div class="ft">EU Job Tracker · automated daily scan</div>
+</div>
+</body>
+</html>"""
+
+
+def send_email(jobs: list) -> None:
+    sender    = os.environ.get("GMAIL_ADDRESS", "").strip()
+    password  = os.environ.get("GMAIL_APP_PASSWORD", "").strip()
+    recip_raw = os.environ.get("EMAIL_RECIPIENTS", "").strip()
+
+    if not (sender and password and recip_raw):
+        print("  [email] Credentials not set — skipping.")
+        return
+
+    recipients = [r.strip() for r in recip_raw.split(",") if r.strip()]
+    if not recipients:
+        return
+
+    new_jobs  = [j for j in jobs if j.get("is_new")]
+    has_new   = bool(new_jobs)
+    today     = datetime.now().strftime("%B %d, %Y")
+
+    if has_new:
+        subject   = f"[{len(new_jobs)}] New Positions at EU Institutions · {today}"
+        preheader = ", ".join(j["title"] for j in new_jobs[:3])
+    else:
+        subject   = f"No New EU Jobs Today · {today}"
+        preheader = "Nothing new today, but the full report is always available"
+
+    body = _build_email_html(new_jobs, has_new, preheader, today)
+
+    msg = EmailMessage()
+    msg["Subject"] = subject
+    msg["From"]    = formataddr(("EU Job Tracker", sender))
+    msg["To"]      = ", ".join(recipients)
+    msg.set_content("Please view this email in an HTML-capable client.")
+    msg.add_alternative(body, subtype="html")
+
+    try:
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
+            smtp.login(sender, password)
+            smtp.send_message(msg)
+        print(f"  Email sent → {len(recipients)} recipient(s)")
+    except Exception as exc:
+        print(f"  [email] Send failed: {exc}")
+
+
 # ─── Summary + main ───────────────────────────────────────────────────────────
 
 def print_summary(jobs: list, elapsed: float) -> None:
@@ -723,6 +851,7 @@ def main() -> None:
 
     print_summary(jobs, time.perf_counter() - t0)
     generate_report(jobs)
+    send_email(jobs)
 
 
 if __name__ == "__main__":

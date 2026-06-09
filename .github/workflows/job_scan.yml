@@ -1,0 +1,41 @@
+name: EU Job Tracker
+
+on:
+  schedule:
+    - cron: '0 8 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4 pandas python-dotenv
+
+      - name: Run scraper
+        env:
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          EMAIL_RECIPIENTS: ${{ secrets.EMAIL_RECIPIENTS }}
+        run: python scraper.py
+
+      - name: Copy report to docs
+        run: mkdir -p docs && cp report.html docs/report.html
+
+      - name: Commit and push
+        run: |
+          git config user.name "EU Job Tracker"
+          git config user.email "actions@github.com"
+          git add docs/report.html jobs.json
+          git diff --cached --quiet || git commit -m "chore: update report $(date -u +%Y-%m-%d)"
+          git push
