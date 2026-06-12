@@ -20,7 +20,7 @@
     "source": "ECB Direct",
     "id": "5f32347e8ab7d480",
     "is_new": false,
-    "scraped_at": "2026-06-11T12:04:22.783150+00:00",
+    "scraped_at": "2026-06-12T11:37:47.570131+00:00",
     "keyword_match": false
   },
   {
@@ -44,7 +44,7 @@
     "source": "ECB Direct",
     "id": "796d606d948f2270",
     "is_new": false,
-    "scraped_at": "2026-06-11T12:04:22.783150+00:00",
+    "scraped_at": "2026-06-12T11:37:47.570131+00:00",
     "keyword_match": false
   },
   {
@@ -68,7 +68,7 @@
     "source": "ECB Direct",
     "id": "390905cca1915818",
     "is_new": false,
-    "scraped_at": "2026-06-11T12:04:22.783150+00:00",
+    "scraped_at": "2026-06-12T11:37:47.570131+00:00",
     "keyword_match": false
   },
   {
@@ -92,7 +92,7 @@
     "source": "ECB Direct",
     "id": "b3c0fbc11b992ff5",
     "is_new": false,
-    "scraped_at": "2026-06-11T12:04:22.783150+00:00",
+    "scraped_at": "2026-06-12T11:37:47.570131+00:00",
     "keyword_match": false
   },
   {
@@ -116,7 +116,7 @@
     "source": "ECB Direct",
     "id": "5273808885fa5f28",
     "is_new": false,
-    "scraped_at": "2026-06-11T12:04:22.783150+00:00",
+    "scraped_at": "2026-06-12T11:37:47.570131+00:00",
     "keyword_match": false
   },
   {
@@ -140,7 +140,35 @@
     "source": "ECB Direct",
     "id": "9965bcd30e43a209",
     "is_new": false,
-    "scraped_at": "2026-06-11T12:04:22.783150+00:00",
+    "scraped_at": "2026-06-12T11:37:47.570131+00:00",
+    "keyword_match": false
+  },
+  {
+    "title": "Adviser for Social Affairs Department",
+    "institution": "BUSINESSEUROPE",
+    "department": "",
+    "location": "Brussels",
+    "deadline": "",
+    "posted": "Posted today Deadline 28 June",
+    "contract_type": "",
+    "who_can_apply": "",
+    "salary": "",
+    "grade": "",
+    "working_time": "",
+    "role_specialisation": "",
+    "prerequisites": "",
+    "tags": [
+      "Communication/Public Relations",
+      "Employment and Social Affairs",
+      "Industry Association"
+    ],
+    "description": "In this role, you will monitor relevant EU social policy initiatives, work with our members to develop advocacy actions, organising expert working group meetings and drafting position papers, speec…",
+    "entry_level": "Professional",
+    "url": "https://www.eurobrussels.com/job_display/292350/Adviser_for_Social_Affairs_Department_BUSINESSEUROPE_Brussels_Belgium",
+    "source": "EuroBrussels",
+    "id": "461e0ee9a74197a2",
+    "is_new": true,
+    "scraped_at": "2026-06-12T11:37:47.570131+00:00",
     "keyword_match": false
   },
   {
@@ -149,7 +177,7 @@
     "department": "",
     "location": "Brussels",
     "deadline": "",
-    "posted": "Posted today Deadline 19 June",
+    "posted": "Posted 1 day ago Deadline 19 June",
     "contract_type": "",
     "who_can_apply": "",
     "salary": "€ 5 154 per month",
@@ -167,8 +195,8 @@
     "url": "https://www.eurobrussels.com/job_display/292257/Associate_Project_Officer_InterPares_Belgium_International_IDEA_The_International_Institute_for_Democracy_and_Electoral_Assistance_Brussels_Belgium",
     "source": "EuroBrussels",
     "id": "f97a3ac08a39ecac",
-    "is_new": true,
-    "scraped_at": "2026-06-11T12:04:22.783150+00:00",
+    "is_new": false,
+    "scraped_at": "2026-06-12T11:37:47.570131+00:00",
     "keyword_match": false
   },
   {
@@ -177,7 +205,7 @@
     "department": "",
     "location": "Remote",
     "deadline": "",
-    "posted": "Posted 1 day ago Deadline 23 June",
+    "posted": "Posted 2 days ago Deadline 23 June",
     "contract_type": "",
     "who_can_apply": "",
     "salary": "€ 4,748.78 per month gross",
@@ -196,8 +224,8 @@
     "url": "https://www.eurobrussels.com/job_display/292243/Senior_Programmes_Officer_ILGA_Europe_European_Region_of_the_Lesbian_Gay_Bisexual_Trans_and_Intersex_Association_Remote_Multiple_Countries",
     "source": "EuroBrussels",
     "id": "ea5f3a2e672eb54d",
-    "is_new": true,
-    "scraped_at": "2026-06-11T12:04:22.783150+00:00",
+    "is_new": false,
+    "scraped_at": "2026-06-12T11:37:47.570131+00:00",
     "keyword_match": false
   },
   {
@@ -206,7 +234,7 @@
     "department": "",
     "location": "Brussels",
     "deadline": "",
-    "posted": "Posted 3 days ago Deadline 19 June",
+    "posted": "Posted 4 days ago Deadline 19 June",
     "contract_type": "",
     "who_can_apply": "",
     "salary": "",
@@ -226,7 +254,7 @@
     "source": "EuroBrussels",
     "id": "c5b3ae1b4c96d2c4",
     "is_new": false,
-    "scraped_at": "2026-06-11T12:04:22.783150+00:00",
+    "scraped_at": "2026-06-12T11:37:47.570131+00:00",
     "keyword_match": false
   },
   {
@@ -235,7 +263,7 @@
     "department": "",
     "location": "Brussels",
     "deadline": "",
-    "posted": "Posted 3 days ago Deadline 5 July",
+    "posted": "Posted 4 days ago Deadline 5 July",
     "contract_type": "",
     "who_can_apply": "",
     "salary": "€ 10.775 - € 11.500 per month gross",
@@ -254,36 +282,7 @@
     "source": "EuroBrussels",
     "id": "af4c71c1669d7f6f",
     "is_new": false,
-    "scraped_at": "2026-06-11T12:04:22.783150+00:00",
-    "keyword_match": false
-  },
-  {
-    "title": "Programme Officer - Product Policies",
-    "institution": "ECOS - Environmental Coalition on Standards",
-    "department": "",
-    "location": "Brussels",
-    "deadline": "Expiring today",
-    "posted": "Posted 6 days ago",
-    "contract_type": "",
-    "who_can_apply": "",
-    "salary": "€ 3,279 - € 3,910 per month",
-    "grade": "",
-    "working_time": "",
-    "role_specialisation": "",
-    "prerequisites": "",
-    "tags": [
-      "Communication/Public Relations",
-      "Consumers, Public Health and Food Safety",
-      "Energy",
-      "Environment"
-    ],
-    "description": "The successful candidate will work on standardisation, policy developments, and project management related to ecodesign and energy labelling, in the framework of the EU’s Ecodesign for Sustainable …",
-    "entry_level": "Professional",
-    "url": "https://www.eurobrussels.com/job_display/292059/Programme_Officer_Product_Policies_ECOS_Environmental_Coalition_on_Standards_Brussels_Belgium",
-    "source": "EuroBrussels",
-    "id": "e9e846d3f706f335",
-    "is_new": false,
-    "scraped_at": "2026-06-11T12:04:22.783150+00:00",
+    "scraped_at": "2026-06-12T11:37:47.570131+00:00",
     "keyword_match": false
   },
   {
@@ -292,7 +291,7 @@
     "department": "",
     "location": "Brussels",
     "deadline": "",
-    "posted": "Posted 6 days ago",
+    "posted": "Posted 7 days ago",
     "contract_type": "",
     "who_can_apply": "",
     "salary": "",
@@ -310,7 +309,7 @@
     "source": "EuroBrussels",
     "id": "f4c7b804e492a848",
     "is_new": false,
-    "scraped_at": "2026-06-11T12:04:22.783150+00:00",
+    "scraped_at": "2026-06-12T11:37:47.570131+00:00",
     "keyword_match": false
   },
   {
@@ -319,7 +318,7 @@
     "department": "",
     "location": "Brussels",
     "deadline": "",
-    "posted": "Posted 7 days ago",
+    "posted": "Posted 8 days ago",
     "contract_type": "",
     "who_can_apply": "",
     "salary": "From € 200,000.00 up to € 250,000.00 per year",
@@ -338,7 +337,7 @@
     "source": "EuroBrussels",
     "id": "5d8b48a45b954917",
     "is_new": false,
-    "scraped_at": "2026-06-11T12:04:22.783150+00:00",
+    "scraped_at": "2026-06-12T11:37:47.570131+00:00",
     "keyword_match": false
   },
   {
@@ -347,7 +346,7 @@
     "department": "",
     "location": "Brussels",
     "deadline": "",
-    "posted": "Posted 7 days ago Deadline 17 June",
+    "posted": "Posted 8 days ago Deadline 17 June",
     "contract_type": "",
     "who_can_apply": "",
     "salary": "",
@@ -366,7 +365,7 @@
     "source": "EuroBrussels",
     "id": "c635ed1b74ae1d20",
     "is_new": false,
-    "scraped_at": "2026-06-11T12:04:22.783150+00:00",
+    "scraped_at": "2026-06-12T11:37:47.570131+00:00",
     "keyword_match": false
   },
   {
@@ -375,7 +374,7 @@
     "department": "",
     "location": "Saint-Germain-en-Laye",
     "deadline": "",
-    "posted": "Posted 7 days ago Deadline 1 July",
+    "posted": "Posted 8 days ago Deadline 1 July",
     "contract_type": "",
     "who_can_apply": "",
     "salary": "From € 6,688.71 up to € 9,884.02 per month net",
@@ -394,7 +393,7 @@
     "source": "EuroBrussels",
     "id": "2c0005b51c5eb03e",
     "is_new": false,
-    "scraped_at": "2026-06-11T12:04:22.783150+00:00",
+    "scraped_at": "2026-06-12T11:37:47.570131+00:00",
     "keyword_match": false
   },
   {
@@ -403,7 +402,7 @@
     "department": "",
     "location": "Brussels",
     "deadline": "",
-    "posted": "Posted 7 days ago",
+    "posted": "Posted 8 days ago",
     "contract_type": "",
     "who_can_apply": "",
     "salary": "",
@@ -422,7 +421,7 @@
     "source": "EuroBrussels",
     "id": "1ef730ac21366dff",
     "is_new": false,
-    "scraped_at": "2026-06-11T12:04:22.783150+00:00",
+    "scraped_at": "2026-06-12T11:37:47.570131+00:00",
     "keyword_match": false
   },
   {
@@ -431,7 +430,7 @@
     "department": "",
     "location": "Brussels",
     "deadline": "",
-    "posted": "Posted 8 days ago Deadline 3 July",
+    "posted": "Posted 9 days ago Deadline 3 July",
     "contract_type": "",
     "who_can_apply": "",
     "salary": "€ 7,000 - € 9,500 per month gross",
@@ -451,7 +450,7 @@
     "source": "EuroBrussels",
     "id": "cdc7e37a6e07917a",
     "is_new": false,
-    "scraped_at": "2026-06-11T12:04:22.783150+00:00",
+    "scraped_at": "2026-06-12T11:37:47.570131+00:00",
     "keyword_match": false
   },
   {
@@ -460,7 +459,7 @@
     "department": "",
     "location": "Brussels",
     "deadline": "",
-    "posted": "Posted 8 days ago Deadline 21 June",
+    "posted": "Posted 9 days ago Deadline 21 June",
     "contract_type": "",
     "who_can_apply": "",
     "salary": "",
@@ -479,36 +478,7 @@
     "source": "EuroBrussels",
     "id": "36e7d4a7afab1017",
     "is_new": false,
-    "scraped_at": "2026-06-11T12:04:22.783150+00:00",
-    "keyword_match": false
-  },
-  {
-    "title": "Lawyer - Institutional and European Union Law",
-    "institution": "EIB - European Investment Bank",
-    "department": "",
-    "location": "Luxembourg",
-    "deadline": "Expiring today",
-    "posted": "Posted 8 days ago",
-    "contract_type": "",
-    "who_can_apply": "",
-    "salary": "",
-    "grade": "",
-    "working_time": "",
-    "role_specialisation": "",
-    "prerequisites": "",
-    "tags": [
-      "Economic and Monetary Affairs",
-      "EU Institution",
-      "Justice, Freedom and Security",
-      "Legal"
-    ],
-    "description": "You will represent the EIB as an agent in litigation before the Court of Justice of the European Union. You will also provide legal advice in institutional and European Union law, in particular as …",
-    "entry_level": "Professional",
-    "url": "https://www.eurobrussels.com/job_display/291891/Lawyer_Institutional_and_European_Union_Law_EIB_European_Investment_Bank_Luxembourg_Luxembourg",
-    "source": "EuroBrussels",
-    "id": "38c1b59da2cae48a",
-    "is_new": false,
-    "scraped_at": "2026-06-11T12:04:22.783150+00:00",
+    "scraped_at": "2026-06-12T11:37:47.570131+00:00",
     "keyword_match": false
   },
   {
@@ -517,7 +487,7 @@
     "department": "",
     "location": "Garching",
     "deadline": "",
-    "posted": "Posted 9 days ago Deadline 28 June",
+    "posted": "Posted 10 days ago Deadline 28 June",
     "contract_type": "",
     "who_can_apply": "",
     "salary": "",
@@ -536,7 +506,7 @@
     "source": "EuroBrussels",
     "id": "c8a66909a668338f",
     "is_new": false,
-    "scraped_at": "2026-06-11T12:04:22.783150+00:00",
+    "scraped_at": "2026-06-12T11:37:47.570131+00:00",
     "keyword_match": false
   },
   {
@@ -545,7 +515,7 @@
     "department": "",
     "location": "Brussels",
     "deadline": "",
-    "posted": "Posted 9 days ago Deadline 25 June",
+    "posted": "Posted 10 days ago Deadline 25 June",
     "contract_type": "",
     "who_can_apply": "",
     "salary": "",
@@ -565,7 +535,7 @@
     "source": "EuroBrussels",
     "id": "df6bd802a97d2f6c",
     "is_new": false,
-    "scraped_at": "2026-06-11T12:04:22.783150+00:00",
+    "scraped_at": "2026-06-12T11:37:47.570131+00:00",
     "keyword_match": false
   },
   {
@@ -573,8 +543,8 @@
     "institution": "British Embassy",
     "department": "",
     "location": "Brussels",
-    "deadline": "",
-    "posted": "Posted 10 days ago Deadline 15 June",
+    "deadline": "3 days left",
+    "posted": "Posted 11 days ago",
     "contract_type": "",
     "who_can_apply": "",
     "salary": "€ 5,685.06 per month gross",
@@ -593,7 +563,7 @@
     "source": "EuroBrussels",
     "id": "f811f3983b4fc989",
     "is_new": false,
-    "scraped_at": "2026-06-11T12:04:22.783150+00:00",
+    "scraped_at": "2026-06-12T11:37:47.570131+00:00",
     "keyword_match": false
   },
   {
@@ -601,8 +571,8 @@
     "institution": "KB Nationale Bibliotheek",
     "department": "",
     "location": "Den Haag",
-    "deadline": "",
-    "posted": "Posted 10 days ago Deadline 15 June",
+    "deadline": "3 days left",
+    "posted": "Posted 11 days ago",
     "contract_type": "",
     "who_can_apply": "",
     "salary": "€ 3,630 - € 5,758 per month gross",
@@ -622,7 +592,7 @@
     "source": "EuroBrussels",
     "id": "82ddaa2b79fbc8f1",
     "is_new": false,
-    "scraped_at": "2026-06-11T12:04:22.783150+00:00",
+    "scraped_at": "2026-06-12T11:37:47.570131+00:00",
     "keyword_match": false
   },
   {
@@ -631,7 +601,7 @@
     "department": "",
     "location": "Brussels",
     "deadline": "",
-    "posted": "Posted 10 days ago Deadline 1 September",
+    "posted": "Posted 11 days ago Deadline 1 September",
     "contract_type": "",
     "who_can_apply": "",
     "salary": "",
@@ -651,7 +621,7 @@
     "source": "EuroBrussels",
     "id": "48dc4dc79dc87b2e",
     "is_new": false,
-    "scraped_at": "2026-06-11T12:04:22.783150+00:00",
+    "scraped_at": "2026-06-12T11:37:47.570131+00:00",
     "keyword_match": false
   },
   {
@@ -660,7 +630,7 @@
     "department": "",
     "location": "Brussels",
     "deadline": "",
-    "posted": "Posted 13 days ago Deadline 21 June",
+    "posted": "Posted 14 days ago Deadline 21 June",
     "contract_type": "",
     "who_can_apply": "",
     "salary": "",
@@ -680,92 +650,7 @@
     "source": "EuroBrussels",
     "id": "593ba988c53da8d3",
     "is_new": false,
-    "scraped_at": "2026-06-11T12:04:22.783150+00:00",
-    "keyword_match": false
-  },
-  {
-    "title": "Senior Communications Officer",
-    "institution": "REScoop.eu",
-    "department": "",
-    "location": "Brussels",
-    "deadline": "",
-    "posted": "Posted 15 days ago Deadline 19 June",
-    "contract_type": "",
-    "who_can_apply": "",
-    "salary": "",
-    "grade": "",
-    "working_time": "",
-    "role_specialisation": "",
-    "prerequisites": "",
-    "tags": [
-      "Communication/Public Relations",
-      "Energy",
-      "Environment",
-      "Hybrid"
-    ],
-    "description": "Acting as project communications lead for one or more EU-funded projects (reporting, consortium meetings, deliverables, keeping track of project expenditures). Effectively disseminating outputs gen…",
-    "entry_level": "Senior",
-    "url": "https://www.eurobrussels.com/job_display/291628/Senior_Communications_Officer_REScoopeu_Brussels_Belgium",
-    "source": "EuroBrussels",
-    "id": "aab05ff4f18cfb22",
-    "is_new": false,
-    "scraped_at": "2026-06-11T12:04:22.783150+00:00",
-    "keyword_match": false
-  },
-  {
-    "title": "Director of Programmes",
-    "institution": "EED - European Endowment for Democracy",
-    "department": "",
-    "location": "Brussels",
-    "deadline": "",
-    "posted": "Posted 15 days ago Deadline 25 June",
-    "contract_type": "",
-    "who_can_apply": "",
-    "salary": "€ 13.970,96 per month gross",
-    "grade": "",
-    "working_time": "",
-    "role_specialisation": "",
-    "prerequisites": "",
-    "tags": [
-      "External Relations and Development Aid",
-      "Human Rights and Democracy",
-      "Hybrid",
-      "NGO and Political"
-    ],
-    "description": "Provide strategic leadership and oversight of EED’s programme portfolio. Advise the Executive Director on international political contexts, programmatic strategy, and programme priorities. Contribu…",
-    "entry_level": "Management",
-    "url": "https://www.eurobrussels.com/job_display/291624/Director_of_Programmes_EED_European_Endowment_for_Democracy_Brussels_Belgium",
-    "source": "EuroBrussels",
-    "id": "4120ab3bdf0d008f",
-    "is_new": false,
-    "scraped_at": "2026-06-11T12:04:22.783150+00:00",
-    "keyword_match": false
-  },
-  {
-    "title": "Deputy Travel Team Lead",
-    "institution": "ESO - European Southern Observatory",
-    "department": "",
-    "location": "Garching",
-    "deadline": "",
-    "posted": "Posted 15 days ago Deadline 30 June",
-    "contract_type": "",
-    "who_can_apply": "",
-    "salary": "",
-    "grade": "",
-    "working_time": "",
-    "role_specialisation": "",
-    "prerequisites": "",
-    "tags": [
-      "International Organisations",
-      "Operations (Accounts, HR, IT)"
-    ],
-    "description": "Support the Travel Team Lead in defining the requirements and specifications for the selection, contract administration and performance evaluation of travel providers (external travel office, airli…",
-    "entry_level": "Senior",
-    "url": "https://www.eurobrussels.com/job_display/291623/Deputy_Travel_Team_Lead_ESO_European_Southern_Observatory_Garching_Germany",
-    "source": "EuroBrussels",
-    "id": "eb79b08594305662",
-    "is_new": false,
-    "scraped_at": "2026-06-11T12:04:22.783150+00:00",
+    "scraped_at": "2026-06-12T11:37:47.570131+00:00",
     "keyword_match": false
   }
 ]
