@@ -20,7 +20,10 @@ jobs:
           python-version: '3.12'
 
       - name: Install dependencies
-        run: pip install requests beautifulsoup4 pandas python-dotenv
+        run: |
+          pip install requests beautifulsoup4 pandas python-dotenv playwright
+          playwright install chromium
+          playwright install-deps chromium
 
       - name: Run scraper
         env:

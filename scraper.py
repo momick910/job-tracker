@@ -118,6 +118,28 @@ def matches_keywords(job: dict, keywords: list) -> bool:
     return any(kw in text for kw in keywords)
 
 
+_PICK_KW_RE    = re.compile(r"econom|polic|monetary|financ|analyst|research|trade|macro|fiscal|budget|development|international|affairs|governance", re.I)
+_SENIOR_EXC_RE = re.compile(r"\b(senior|principal|chief|director|head|manager|lead|general|deputy)\b", re.I)
+_PICK_YEARS_RE = re.compile(r"\b(\d+)\+?\s*years?\b", re.I)
+
+
+def is_alejandra_pick(job: dict) -> bool:
+    search_text = " ".join([
+        job.get("title", ""), job.get("department", ""),
+        job.get("description", ""), job.get("experience", ""),
+        job.get("prerequisites", ""),
+    ])
+    if not _PICK_KW_RE.search(search_text):
+        return False
+    if _SENIOR_EXC_RE.search(job.get("title", "")):
+        return False
+    exp_text = job.get("experience", "") + " " + job.get("prerequisites", "")
+    year_nums = [int(m) for m in _PICK_YEARS_RE.findall(exp_text)]
+    if year_nums and min(year_nums) > 4:
+        return False
+    return True
+
+
 def fetch(url: str, timeout: int = 20):
     try:
         r = SESSION.get(url, timeout=timeout, allow_redirects=True)
@@ -1169,9 +1191,10 @@ def process(raw: list, previous: dict, keywords: list) -> list:
         if jid in seen:
             continue
         seen.add(jid)
-        job["id"]         = jid
-        job["is_new"]     = jid not in previous
-        job["scraped_at"] = now
+        job["id"]             = jid
+        job["is_new"]         = jid not in previous
+        job["scraped_at"]     = now
+        job["alejandra_pick"] = is_alejandra_pick(job)
         if keywords:
             if not matches_keywords(job, keywords):
                 continue
@@ -1191,6 +1214,7 @@ def save(jobs: list) -> None:
 def generate_report(jobs: list) -> None:
     total        = len(jobs)
     new_count    = sum(1 for j in jobs if j.get("is_new"))
+    pick_count   = sum(1 for j in jobs if j.get("alejandra_pick"))
     institutions = sorted({j["institution"] for j in jobs})
     levels       = ["Trainee", "Junior", "Professional", "Senior", "Management"]
     run_time     = datetime.now().strftime("%Y-%m-%d %H:%M")
@@ -1215,6 +1239,7 @@ def generate_report(jobs: list) -> None:
         ]
         if job.get("is_new"):          badges.append('<span class="bn">New</span>')
         if job.get("keyword_match"):   badges.append('<span class="bm">Match</span>')
+        pick_badge = '<span class="bp">⭐ Pick</span>' if job.get("alejandra_pick") else ""
 
         # Key-value rows — only non-empty fields are rendered
         meta_rows = "".join(filter(None, [
@@ -1258,10 +1283,11 @@ def generate_report(jobs: list) -> None:
             f' data-institution="{esc(job["institution"])}"'
             f' data-level="{esc(level)}"'
             f' data-new="{str(job.get("is_new", False)).lower()}"'
+            f' data-pick="{str(job.get("alejandra_pick", False)).lower()}"'
             f' data-title="{esc(job["title"].lower())}"'
             f' data-dept="{esc(job.get("department","").lower())}"'
             f' data-deadline="{esc(job.get("deadline",""))}">'
-            f'<div class="jh">{"".join(badges)}</div>'
+            f'<div class="jh">{"".join(badges)}{pick_badge}</div>'
             f'<div class="jti">{esc(job["title"])}</div>'
             f'<div class="jin">{esc(job["institution"])}</div>'
             f'{exp_html}'
@@ -1320,13 +1346,14 @@ body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
 #search:focus{{border-color:#3b82f6;background:#fff;box-shadow:0 0 0 3px rgba(59,130,246,.1)}}
 .fb select{{border:1.5px solid #e5e7eb;border-radius:8px;padding:.38rem 1.8rem .38rem .65rem;font-size:.81rem;outline:none;background:#f9fafb url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%239ca3af' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E") no-repeat right .6rem center;color:#374151;cursor:pointer;appearance:none;-webkit-appearance:none;transition:border-color .15s,background-color .15s}}
 .fb select:focus{{border-color:#3b82f6;background-color:#fff;box-shadow:0 0 0 3px rgba(59,130,246,.1)}}
-#no-btn{{border:1.5px solid #e5e7eb;border-radius:8px;padding:.38rem .8rem;font-size:.81rem;cursor:pointer;background:#f9fafb;color:#374151;transition:all .15s;white-space:nowrap;user-select:none;line-height:1}}
+#no-btn,#pick-btn{{border:1.5px solid #e5e7eb;border-radius:8px;padding:.38rem .8rem;font-size:.81rem;cursor:pointer;background:#f9fafb;color:#374151;transition:all .15s;white-space:nowrap;user-select:none;line-height:1}}
 #no-btn.on{{background:#dcfce7;border-color:#86efac;color:#166534;font-weight:600}}
+#pick-btn.on{{background:#fef9c3;border-color:#fde047;color:#854d0e;font-weight:600}}
 #cl{{font-size:.76rem;color:#9ca3af;margin-left:auto;background:#f1f5f9;padding:.3rem .7rem;border-radius:20px;white-space:nowrap}}
 @media(max-width:600px){{
   .fb{{padding:.75rem 1rem .6rem}}
   .fb-bot{{display:grid;grid-template-columns:1fr 1fr;gap:.4rem}}
-  .fb select,#no-btn{{width:100%;box-sizing:border-box}}
+  .fb select,#no-btn,#pick-btn{{width:100%;box-sizing:border-box}}
   #inf{{grid-column:1/-1}}
   #cl{{grid-column:1/-1;margin-left:0;text-align:center}}
 }}
@@ -1344,6 +1371,7 @@ body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
 .bs,.bl,.bn,.bm{{font-size:.63rem;font-weight:700;padding:.2rem .52rem;border-radius:4px;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}}
 .bn{{background:#fef3c7;color:#92400e}}
 .bm{{background:#dbeafe;color:#1e40af}}
+.bp{{background:#fef9c3;color:#854d0e;border:1px solid #fde047;margin-left:auto}}
 
 /* ── Title / institution ── */
 .jti{{font-size:1.05rem;font-weight:700;color:#111827;line-height:1.3;margin-bottom:.18rem}}
@@ -1421,6 +1449,7 @@ body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
       <option value="title">Sort: title</option>
     </select>
     <button id="no-btn" onclick="toggleNew()">✦ New only</button>
+    <button id="pick-btn" onclick="togglePick()">⭐ Top Picks for Alejandra ({pick_count})</button>
     <span id="cl">Showing {total} jobs</span>
   </div>
 </div>
@@ -1429,8 +1458,11 @@ body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
 </div>
 <script>
 function toggleNew(){{
-  var btn=document.getElementById('no-btn');
-  btn.classList.toggle('on');
+  document.getElementById('no-btn').classList.toggle('on');
+  af();
+}}
+function togglePick(){{
+  document.getElementById('pick-btn').classList.toggle('on');
   af();
 }}
 function af(){{
@@ -1440,6 +1472,7 @@ function af(){{
   var inst=document.getElementById('inf').value;
   var srt=document.getElementById('so').value;
   var nw=document.getElementById('no-btn').classList.contains('on');
+  var pk=document.getElementById('pick-btn').classList.contains('on');
   var g=document.getElementById('grid');
   var all=Array.from(g.querySelectorAll('.jc'));
   var vis=all.filter(function(c){{
@@ -1448,6 +1481,7 @@ function af(){{
     if(lvl&&c.dataset.level!==lvl)return false;
     if(inst&&c.dataset.institution!==inst)return false;
     if(nw&&c.dataset.new!=='true')return false;
+    if(pk&&c.dataset.pick!=='true')return false;
     return true;
   }});
   if(srt==='deadline')vis.sort(function(a,b){{var da=a.dataset.deadline||'zzz',db=b.dataset.deadline||'zzz';return da<db?-1:da>db?1:0}});
