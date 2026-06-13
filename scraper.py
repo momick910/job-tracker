@@ -19,6 +19,7 @@ from pathlib import Path
 
 import requests
 from bs4 import BeautifulSoup
+from playwright.sync_api import sync_playwright
 
 try:
     from dotenv import load_dotenv
@@ -30,7 +31,6 @@ except ImportError:
 
 JOBS_FILE   = Path("jobs.json")
 REPORT_FILE = Path("report.html")
-EB_BASE     = "https://www.eurobrussels.com"
 REPORT_URL  = "https://momick910.github.io/job-tracker/report.html"
 
 HEADERS = {
@@ -45,7 +45,15 @@ SESSION.headers.update(HEADERS)
 
 SOURCE_COLORS = {
     "ECB Direct":   "#003299",
-    "EuroBrussels": "#c0392b",
+    "EEAS":         "#003366",
+    "Bruegel":      "#c0392b",
+    "EU Commission":"#2e7d32",
+    "EU Parliament":"#7b1fa2",
+    "EU Council":   "#e65100",
+    "EIB":          "#00695c",
+    "OECD":         "#0277bd",
+    "AIIB":         "#c62828",
+    "ADB":          "#1565c0",
 }
 
 LEVEL_BADGE_STYLE = {
@@ -205,6 +213,27 @@ def extract_prerequisites(value_el) -> str:
     return text[:320] + "…" if len(text) > 320 else text
 
 
+_EXP_KW = re.compile(r"experience|requirement|qualif|profile|background|degree|education", re.I)
+
+
+def _extract_experience_snippet(html_text: str, max_len: int = 120) -> str:
+    """Return a short experience/requirements snippet from job HTML content."""
+    if not html_text:
+        return ""
+    soup = BeautifulSoup(html_text, "html.parser")
+    # Prefer a sentence/paragraph that mentions experience keywords
+    for el in soup.find_all(["p", "li"]):
+        text = clean(el.get_text(" "))
+        if len(text) > 25 and _EXP_KW.search(text):
+            return text[:max_len] + ("…" if len(text) > max_len else "")
+    # Fallback: first non-trivial paragraph
+    for p in soup.find_all("p"):
+        text = clean(p.get_text(" "))
+        if len(text) > 30:
+            return text[:max_len] + ("…" if len(text) > max_len else "")
+    return ""
+
+
 # ─── ECB Direct ───────────────────────────────────────────────────────────────
 
 def fetch_ecb_detail(url: str) -> dict:
@@ -297,11 +326,12 @@ def scrape_ecb() -> list:
         contract_type = detail.get("contract_type", "")
         grade         = detail.get("grade", "")
 
+        prereqs = detail.get("prerequisites", "")
         jobs.append({
             "title":             title,
             "institution":       expand_institution("ECB"),
             "department":        department,
-            "location":          detail.get("working_time", "") and "Frankfurt, Germany" or "Frankfurt, Germany",
+            "location":          "Frankfurt, Germany",
             "deadline":          deadline,
             "posted":            "",
             "contract_type":     contract_type,
@@ -310,7 +340,8 @@ def scrape_ecb() -> list:
             "grade":             grade,
             "working_time":      detail.get("working_time", ""),
             "role_specialisation": detail.get("role_specialisation", ""),
-            "prerequisites":     detail.get("prerequisites", ""),
+            "prerequisites":     prereqs,
+            "experience":        trunc(prereqs, 120),
             "tags":              [],
             "description":       "",
             "entry_level":       infer_entry_level(title, grade, contract_type),
@@ -321,85 +352,799 @@ def scrape_ecb() -> list:
     return jobs
 
 
-# ─── EuroBrussels ─────────────────────────────────────────────────────────────
+# ─── Playwright helper ────────────────────────────────────────────────────────
 
-def parse_eurobrussels_dates(raw: str) -> tuple:
-    """Return (deadline, posted) from EuroBrussels postedDate text."""
-    raw = clean(raw)
-    parts = re.split(r"(?=Posted\b)", raw, maxsplit=1)
-    if len(parts) == 2:
-        deadline_raw, posted_raw = parts
-    else:
-        deadline_raw, posted_raw = "", parts[0]
-    return deadline_raw.strip(), posted_raw.strip()
+def scrape_with_playwright(url: str, wait_for: str | None = None, wait_ms: int = 3000) -> str:
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page()
+        page.goto(url, timeout=30000)
+        if wait_for:
+            page.wait_for_selector(wait_for, timeout=15000)
+        else:
+            page.wait_for_timeout(wait_ms)
+        content = page.content()
+        browser.close()
+        return content
 
 
-def scrape_eurobrussels() -> list:
-    """Scrape eurobrussels.com/job_search."""
-    url  = f"{EB_BASE}/job_search"
-    soup = fetch(url)
+# ─── EEAS ─────────────────────────────────────────────────────────────────────
+
+_EEAS_URLS = [
+    "https://www.eeas.europa.eu/eeas/vacancies_en?f%5B0%5D=contract_type%3ATemporary%20Agent",
+    "https://www.eeas.europa.eu/eeas/vacancies_en?f%5B0%5D=contract_type%3ATrainee",
+    "https://www.eeas.europa.eu/eeas/vacancies_en?f%5B0%5D=contract_type%3AACSDP%20Mission%20post",
+]
+
+
+def scrape_eeas() -> list:
+    """Scrape EEAS vacancies across three contract-type filter URLs via Playwright."""
+    jobs: list = []
+    seen_urls: set = set()
+
+    for url in _EEAS_URLS:
+        label = url.split("contract_type%3A")[-1]
+        print(f"  Fetching EEAS [{label}]...")
+        raw_html = scrape_with_playwright(url, wait_ms=5000)
+        soup = BeautifulSoup(raw_html, "html.parser")
+
+        # Try selectors in order of specificity
+        job_els = (
+            soup.select(".views-row")
+            or soup.find_all("article")
+            or [li for li in soup.find_all("li") if li.find("a", href=True)]
+        )
+
+        # Print the first element found so we can verify the selector
+        if job_els:
+            print(f"\n--- EEAS [{label}] first job element ---")
+            print(str(job_els[0])[:1500])
+            print("--- end ---\n")
+        else:
+            print(f"  [!] EEAS [{label}]: no job elements found")
+            continue
+
+        for el in job_els:
+            a = el.find("a", href=True)
+            if not a:
+                continue
+            title = clean(a.get_text())
+            href = a["href"].strip()
+            job_url = href if href.startswith("http") else f"https://www.eeas.europa.eu{href}"
+            if not title or job_url in seen_urls:
+                continue
+            seen_urls.add(job_url)
+            jobs.append({
+                "title":               title,
+                "institution":         expand_institution("EEAS"),
+                "department":          "",
+                "location":            "",
+                "deadline":            "",
+                "posted":              "",
+                "contract_type":       label,
+                "who_can_apply":       "",
+                "salary":              "",
+                "grade":               "",
+                "working_time":        "",
+                "role_specialisation": "",
+                "prerequisites":       "",
+                "experience":          "",
+                "tags":                [],
+                "description":         "",
+                "entry_level":         infer_entry_level(title),
+                "url":                 job_url,
+                "source":              "EEAS",
+            })
+
+    return jobs
+
+
+# ─── Bruegel ──────────────────────────────────────────────────────────────────
+
+def scrape_bruegel() -> list:
+    """Scrape bruegel.org/careers (plain HTML, no JS required)."""
+    soup = fetch("https://www.bruegel.org/careers")
     if not soup:
         return []
 
-    job_list = soup.find("ul", class_="searchList")
-    if not job_list:
-        print("  [!] EuroBrussels: ul.searchList not found")
+    jobs = []
+    for li in soup.find_all("li", attrs={"data-list-item-id": True}):
+        a = li.find("a", href=True)
+        if not a:
+            continue
+        title = clean(a.get_text())
+        job_url = "https://www.bruegel.org" + a["href"].strip()
+
+        # Deadline is the text node immediately after </a>, wrapped in parentheses
+        deadline = "Rolling basis"
+        for sibling in a.next_siblings:
+            text = sibling if isinstance(sibling, str) else sibling.get_text()
+            m = re.search(r"\(([^)]+)\)", text)
+            if m:
+                deadline = m.group(1).strip()
+                break
+
+        # Any remaining text in the <li> beyond title and deadline parenthetical
+        full_text = clean(li.get_text(" "))
+        leftover  = re.sub(re.escape(title), "", full_text, count=1)
+        leftover  = re.sub(r"\([^)]*\)", "", leftover)
+        experience = clean(leftover)
+        experience = trunc(experience, 120) if experience else ""
+
+        if not title:
+            continue
+        jobs.append({
+            "title":               title,
+            "institution":         expand_institution("Bruegel"),
+            "department":          "",
+            "location":            "Brussels, Belgium",
+            "deadline":            deadline,
+            "posted":              "",
+            "contract_type":       "",
+            "who_can_apply":       "",
+            "salary":              "",
+            "grade":               "",
+            "working_time":        "",
+            "role_specialisation": "",
+            "prerequisites":       "",
+            "experience":          experience,
+            "tags":                [],
+            "description":         "",
+            "entry_level":         infer_entry_level(title),
+            "url":                 job_url,
+            "source":              "Bruegel",
+        })
+
+    print(f"  Bruegel jobs found: {len(jobs)}")
+    return jobs
+
+
+# ─── EU Commission ────────────────────────────────────────────────────────────
+
+_EC_BASE_URL = (
+    "https://eu-careers.europa.eu/en/job-opportunities/open-vacancies/ec_vacancies"
+    "?field_epso_domain_target_id="
+    "&field_epso_type_of_contract_target_id=770"
+    "&field_epso_location_target_id=All"
+)
+
+
+def _parse_ec_page(soup) -> list:
+    """Extract job dicts from one EC vacancies page."""
+    jobs = []
+    for td_title in soup.find_all("td", class_="views-field-title"):
+        a = td_title.find("a", href=True)
+        if not a:
+            continue
+        title = clean(a.get_text())
+        job_url = "https://eu-careers.europa.eu" + a["href"].strip()
+
+        row = td_title.parent
+
+        td_domain = row.find("td", class_="views-field-field-epso-domain")
+        domain = clean(td_domain.get_text()) if td_domain else ""
+
+        td_deadline = row.find("td", class_="views-field-field-epso-deadline")
+        deadline = ""
+        if td_deadline:
+            time_el = td_deadline.find("time")
+            if time_el:
+                deadline = time_el.get("datetime", clean(time_el.get_text()))
+
+        if not title:
+            continue
+        jobs.append({
+            "title":               title,
+            "institution":         "EU Commission",
+            "department":          domain,
+            "location":            "Brussels, Belgium",
+            "deadline":            deadline,
+            "posted":              "",
+            "contract_type":       "",
+            "who_can_apply":       "",
+            "salary":              "",
+            "grade":               "",
+            "working_time":        "",
+            "role_specialisation": domain,
+            "prerequisites":       "",
+            "experience":          "",
+            "tags":                [],
+            "description":         "",
+            "entry_level":         infer_entry_level(title),
+            "url":                 job_url,
+            "source":              "EU Commission",
+        })
+    return jobs
+
+
+def scrape_eu_commission() -> list:
+    """Scrape all pages of eu-careers.europa.eu open EC vacancies (plain HTML)."""
+    jobs: list = []
+    page = 0
+
+    while True:
+        url = f"{_EC_BASE_URL}&page={page}"
+        soup = fetch(url)
+        if not soup:
+            break
+        page_jobs = _parse_ec_page(soup)
+        if not page_jobs:
+            break
+        jobs.extend(page_jobs)
+        print(f"    Page {page + 1}: {len(page_jobs)} jobs")
+        page += 1
+        time.sleep(1)
+
+    print(f"  EU Commission jobs found: {len(jobs)} across {page} page(s)")
+    return jobs
+
+
+# ─── EU Parliament ────────────────────────────────────────────────────────────
+
+def scrape_eu_parliament() -> list:
+    """Scrape apply4ep.gestmax.eu job listings via Playwright (JS-rendered)."""
+    raw_html = scrape_with_playwright("https://apply4ep.gestmax.eu/search/lang/en_GB", wait_ms=3000)
+    soup = BeautifulSoup(raw_html, "html.parser")
+
+    job_els = soup.select(".gestmax-item")
+    if not job_els:
+        container = soup.find(class_=re.compile(r"result|listing|search", re.I))
+        if container:
+            job_els = container.find_all("li")
+
+    if not job_els:
+        print("  EU Parliament: no current openings")
         return []
 
     jobs = []
-    valid_containers = {"premiumJobContainer", "highlightedJobContainer"}
-
-    for li in job_list.find_all("li", recursive=False):
-        if not set(li.get("class", [])) & valid_containers:
-            continue
-
-        h3 = li.find("h3")
-        if not h3:
-            continue
-        a = h3.find("a")
+    for el in job_els:
+        a = el.find("a", href=True)
         if not a:
             continue
+        title = clean(a.get_text())
+        href = a["href"].strip()
+        job_url = href if href.startswith("http") else "https://apply4ep.gestmax.eu" + href
 
-        title   = a.get_text(strip=True)
-        href    = a.get("href", "")
-        job_url = (EB_BASE + href) if href.startswith("/") else href
+        time_el = el.find("time")
+        if time_el:
+            deadline = time_el.get("datetime", clean(time_el.get_text()))
+        else:
+            m = re.search(r"\b(\d{1,2}[./-]\d{1,2}[./-]\d{2,4}|\d{4}-\d{2}-\d{2})\b", el.get_text())
+            deadline = m.group(1) if m else ""
 
-        institution = expand_institution(t(li.find(class_="companyName")))
-        location    = t(li.find(class_="location"))
-        salary      = t(li.find(class_="salary"))
-        posted_raw  = t(li.find(class_="postedDate"))
-        deadline, posted = parse_eurobrussels_dates(posted_raw)
-
-        # Brief description paragraph
-        desc_p = li.find("p")
-        description = clean(desc_p.get_text()) if desc_p else ""
-        if len(description) > 200:
-            description = description[:197] + "…"
-
-        # Sector / type tags
-        tags = [clean(b.get_text()) for b in li.find_all(class_="badge") if clean(b.get_text())]
-
+        if not title:
+            continue
         jobs.append({
-            "title":             title,
-            "institution":       institution,
-            "department":        "",
-            "location":          location,
-            "deadline":          deadline,
-            "posted":            posted,
-            "contract_type":     "",
-            "who_can_apply":     "",
-            "salary":            salary,
-            "grade":             "",
-            "working_time":      "",
+            "title":               title,
+            "institution":         "EU Parliament",
+            "department":          "",
+            "location":            "Brussels, Belgium",
+            "deadline":            deadline,
+            "posted":              "",
+            "contract_type":       "",
+            "who_can_apply":       "",
+            "salary":              "",
+            "grade":               "",
+            "working_time":        "",
             "role_specialisation": "",
-            "prerequisites":     "",
-            "tags":              tags,
-            "description":       description,
-            "entry_level":       infer_entry_level(title),
-            "url":               job_url,
-            "source":            "EuroBrussels",
+            "prerequisites":       "",
+            "experience":          "",
+            "tags":                [],
+            "description":         "",
+            "entry_level":         infer_entry_level(title),
+            "url":                 job_url,
+            "source":              "EU Parliament",
         })
 
+    print(f"  EU Parliament jobs found: {len(jobs)}")
+    return jobs
+
+
+# ─── EU Council ───────────────────────────────────────────────────────────────
+
+def scrape_eu_council() -> list:
+    """Scrape talents.coe.int open positions (plain HTML)."""
+    soup = fetch("https://talents.coe.int/en_GB/careersmarketplace/WidgetOpenPositions")
+    if not soup:
+        return []
+
+    def _sibling_text(strong_el) -> str:
+        """Return the text node that immediately follows a <strong> tag."""
+        if not strong_el:
+            return ""
+        for sibling in strong_el.next_siblings:
+            text = sibling if isinstance(sibling, str) else sibling.get_text()
+            text = clean(text)
+            if text:
+                return text
+        return ""
+
+    jobs = []
+    for article in soup.find_all("article", class_="article--card"):
+        h3 = article.find("h3")
+        if not h3:
+            continue
+        a = h3.find("a", class_="link", href=True)
+        if not a:
+            continue
+        title = clean(a.get_text())
+        job_url = a["href"].strip()
+
+        duty_strong = article.find("strong", string=re.compile(r"Duty station", re.I))
+        location = _sibling_text(duty_strong) or "See posting"
+
+        contract_strong = article.find("strong", string=re.compile(r"Recruitment type", re.I))
+        contract_type = _sibling_text(contract_strong)
+
+        content_div = article.find("div", class_="article__content")
+        experience = ""
+        if content_div:
+            for p in content_div.find_all("p"):
+                text = clean(p.get_text(" "))
+                if len(text) > 25:
+                    experience = trunc(text, 120)
+                    break
+
+        if not title:
+            continue
+        jobs.append({
+            "title":               title,
+            "institution":         "EU Council",
+            "department":          "",
+            "location":            location,
+            "deadline":            "See posting",
+            "posted":              "",
+            "contract_type":       contract_type,
+            "who_can_apply":       "",
+            "salary":              "",
+            "grade":               "",
+            "working_time":        "",
+            "role_specialisation": "",
+            "prerequisites":       "",
+            "experience":          experience,
+            "tags":                [],
+            "description":         "",
+            "entry_level":         infer_entry_level(title, contract_type=contract_type),
+            "url":                 job_url,
+            "source":              "EU Council",
+        })
+
+    print(f"  EU Council jobs found: {len(jobs)}")
+    return jobs
+
+
+# ─── EIB ──────────────────────────────────────────────────────────────────────
+
+def scrape_eib() -> list:
+    """Scrape EIB job postings from their Atom RSS feed."""
+    import xml.etree.ElementTree as ET
+
+    feed_url = (
+        "https://erecruitment.eib.org/PSIGW/HttpListeningConnector/feeds/RealtimeQueryFeed"
+        "?FEED_ID=ADMN_BEI_HRS_JOB_POSTING_RSS_1&S=P"
+    )
+    try:
+        r = SESSION.get(feed_url, timeout=20)
+        r.raise_for_status()
+        root = ET.fromstring(r.content)
+    except Exception as exc:
+        print(f"  [!] EIB feed error: {exc}")
+        return []
+
+    # Atom namespace; age namespace for expires
+    NS  = {"atom": "http://www.w3.org/2005/Atom"}
+    AGE = "http://purl.org/atompub/age/1.0"
+
+    # Strip the trailing "(Entity: EIB - Job ID: XXXXX)" suffix from titles
+    _SUFFIX_RE = re.compile(r"\s*\(Entity:.*?\)\s*$", re.IGNORECASE)
+
+    jobs = []
+    for entry in root.findall("atom:entry", NS):
+        raw_title = (entry.findtext("atom:title", "", NS) or "").strip()
+        title = clean(_SUFFIX_RE.sub("", raw_title))
+
+        link_el = entry.find("atom:link[@rel='alternate']", NS)
+        if link_el is None:
+            link_el = entry.find("atom:link", NS)
+        job_url = link_el.get("href", "").strip() if link_el is not None else ""
+
+        published = (entry.findtext("atom:published", "", NS) or "").strip()[:10]
+
+        expires_el = entry.find(f"{{{AGE}}}expires")
+        deadline = expires_el.text.strip()[:10] if expires_el is not None and expires_el.text else ""
+
+        location = "Luxembourg" if "luxembourg" in title.lower() else "Brussels, Belgium"
+
+        content_el = entry.find("atom:content", NS)
+        content_html = content_el.text if content_el is not None and content_el.text else ""
+        experience = _extract_experience_snippet(content_html)
+
+        if not title:
+            continue
+        jobs.append({
+            "title":               title,
+            "institution":         expand_institution("EIB"),
+            "department":          "",
+            "location":            location,
+            "deadline":            deadline,
+            "posted":              published,
+            "contract_type":       "",
+            "who_can_apply":       "",
+            "salary":              "",
+            "grade":               "",
+            "working_time":        "",
+            "role_specialisation": "",
+            "prerequisites":       "",
+            "experience":          experience,
+            "tags":                [],
+            "description":         "",
+            "entry_level":         infer_entry_level(title),
+            "url":                 job_url,
+            "source":              "EIB",
+        })
+
+    print(f"  EIB jobs found: {len(jobs)}")
+    return jobs
+
+
+# ─── OECD ─────────────────────────────────────────────────────────────────────
+
+_OECD_BASE = "https://careers.smartrecruiters.com"
+_OECD_PAGE = f"{_OECD_BASE}/OECD/oecd---en"
+
+
+def _parse_oecd_html(html_text: str) -> list:
+    """Extract job dicts from one SmartRecruiters HTML page."""
+    soup = BeautifulSoup(html_text, "html.parser")
+    jobs = []
+    for li in soup.find_all("li", class_="opening-job"):
+        a = li.find("a", href=True)
+        if not a:
+            continue
+        h4 = li.find("h4", class_="job-title")
+        if not h4:
+            continue
+        title = clean(h4.get_text())
+        href = a["href"].strip()
+        job_url = href if href.startswith("http") else _OECD_BASE + href
+
+        loc_el = li.find("span", class_="margin--right--s")
+        location = clean(loc_el.get_text()) if loc_el else "See posting"
+
+        if not title:
+            continue
+        jobs.append({
+            "title":               title,
+            "institution":         expand_institution("OECD"),
+            "department":          "",
+            "location":            location,
+            "deadline":            "See posting",
+            "posted":              "",
+            "contract_type":       "",
+            "who_can_apply":       "",
+            "salary":              "",
+            "grade":               "",
+            "working_time":        "",
+            "role_specialisation": "",
+            "prerequisites":       "",
+            "experience":          "",
+            "tags":                [],
+            "description":         "",
+            "entry_level":         infer_entry_level(title),
+            "url":                 job_url,
+            "source":              "OECD",
+        })
+    return jobs
+
+
+def scrape_oecd() -> list:
+    """Scrape OECD jobs from SmartRecruiters: main page + paginated API groups."""
+    jobs: list = []
+    seen_urls: set = set()
+
+    # Main listing page
+    try:
+        r = SESSION.get(_OECD_PAGE, timeout=20)
+        r.raise_for_status()
+        for job in _parse_oecd_html(r.text):
+            if job["url"] not in seen_urls:
+                seen_urls.add(job["url"])
+                jobs.append(job)
+    except Exception as exc:
+        print(f"  [!] OECD main page error: {exc}")
+
+    # Paginated API endpoint for additional job groups
+    try:
+        api_url = f"{_OECD_PAGE}/api/groups"
+        r = SESSION.get(api_url, timeout=20)
+        r.raise_for_status()
+        data = r.json()
+        for group in data if isinstance(data, list) else data.get("groups", []):
+            html_fragment = group.get("html", "")
+            if not html_fragment:
+                continue
+            for job in _parse_oecd_html(html_fragment):
+                if job["url"] not in seen_urls:
+                    seen_urls.add(job["url"])
+                    jobs.append(job)
+    except Exception as exc:
+        print(f"  [!] OECD API groups error: {exc}")
+
+    print(f"  OECD jobs found: {len(jobs)}")
+    return jobs
+
+
+# ─── AIIB ─────────────────────────────────────────────────────────────────────
+
+def scrape_aiib() -> list:
+    """Scrape AIIB staff vacancies from their static JS data file."""
+    js_url = (
+        "https://www.aiib.org/en/opportunities/career/job-vacancies/staff"
+        "/.content/index/current-jobs.js"
+    )
+    try:
+        r = SESSION.get(js_url, timeout=20)
+        r.raise_for_status()
+        js = r.text
+    except Exception as exc:
+        print(f"  [!] AIIB fetch error: {exc}")
+        return []
+
+    def _field(n: int, key: str) -> str:
+        m = re.search(rf'jobs\[{n}\]\["{re.escape(key)}"\]\s*=\s*"([^"]*)"', js)
+        return m.group(1).strip() if m else ""
+
+    # Discover how many entries exist by finding the highest index used
+    indices = {int(m) for m in re.findall(r'jobs\[(\d+)\]', js)}
+    if not indices:
+        print("  [!] AIIB: no job entries found in JS file")
+        return []
+
+    jobs = []
+    for n in sorted(indices):
+        title = html.unescape(_field(n, "title"))
+        path  = _field(n, "path")
+        if not title or not path:
+            continue
+        job_url    = "https://www.aiib.org" + path
+        deadline   = _field(n, "closing-date")
+        dept       = _field(n, "department")
+        location   = _field(n, "location") or "Beijing, China"
+        raw_desc   = html.unescape(_field(n, "description"))
+        experience = trunc(clean(raw_desc), 120) if raw_desc else ""
+
+        jobs.append({
+            "title":               title,
+            "institution":         expand_institution("AIIB"),
+            "department":          dept,
+            "location":            location,
+            "deadline":            deadline,
+            "posted":              "",
+            "contract_type":       "",
+            "who_can_apply":       "",
+            "salary":              "",
+            "grade":               "",
+            "working_time":        "",
+            "role_specialisation": dept,
+            "prerequisites":       "",
+            "experience":          experience,
+            "tags":                [],
+            "description":         "",
+            "entry_level":         infer_entry_level(title),
+            "url":                 job_url,
+            "source":              "AIIB",
+        })
+
+    print(f"  AIIB jobs found: {len(jobs)}")
+    return jobs
+
+
+# ─── ADB ──────────────────────────────────────────────────────────────────────
+
+_ADB_BASE    = "https://www.adb.org"
+_ADB_LIST    = f"{_ADB_BASE}/work-with-us/careers/current-opportunities"
+_ADB_REF_RE  = re.compile(r"\s*/\s*\d+\s*$")
+
+
+_ADB_HREF_RE = re.compile(r"^(https://www\.adb\.org)?/careers/\d+", re.I)
+
+
+def _parse_adb_page(soup) -> list:
+    """Extract job dicts from all job links on one ADB opportunities page."""
+    jobs = []
+    seen: set = set()
+
+    for a in soup.find_all("a", href=_ADB_HREF_RE):
+        href = a["href"].strip()
+        job_url = href if href.startswith("http") else _ADB_BASE + href
+        if job_url in seen:
+            continue
+        seen.add(job_url)
+
+        title = clean(_ADB_REF_RE.sub("", a.get_text()))
+        if not title:
+            continue
+
+        # Walk up to the nearest <tr> to find date cells, if available
+        row = a.find_parent("tr")
+        def _row_datetime(cls: str) -> str:
+            if not row:
+                return ""
+            cell = row.find("td", class_=cls)
+            if not cell:
+                return ""
+            t = cell.find("time")
+            return t.get("datetime") or clean(t.get_text()) if t else ""
+
+        posted   = _row_datetime("views-field-field-date-content")
+        deadline = _row_datetime("views-field-field-date-closing")
+
+        jobs.append({
+            "title":               title,
+            "institution":         expand_institution("ADB"),
+            "department":          "",
+            "location":            "Manila, Philippines",
+            "deadline":            deadline,
+            "posted":              posted,
+            "contract_type":       "",
+            "who_can_apply":       "",
+            "salary":              "",
+            "grade":               "",
+            "working_time":        "",
+            "role_specialisation": "",
+            "prerequisites":       "",
+            "experience":          "",
+            "tags":                [],
+            "description":         "",
+            "entry_level":         infer_entry_level(title),
+            "url":                 job_url,
+            "source":              "ADB",
+        })
+    return jobs
+
+
+_ADB_HEADERS = {
+    "User-Agent":                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Accept":                    "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+    "Accept-Language":           "en-US,en;q=0.5",
+    "Accept-Encoding":           "gzip, deflate, br",
+    "Connection":                "keep-alive",
+    "Upgrade-Insecure-Requests": "1",
+    "Referer":                   "https://www.adb.org/work-with-us/careers",
+}
+
+
+def _fetch_adb_page(page: int):
+    """Fetch one ADB listing page: try rich headers first, fall back to Playwright."""
+    url = f"{_ADB_LIST}?page={page}"
+    try:
+        r = requests.get(url, headers=_ADB_HEADERS, timeout=20, allow_redirects=True)
+        if r.status_code == 403:
+            raise requests.exceptions.HTTPError(response=r)
+        r.raise_for_status()
+        return BeautifulSoup(r.text, "html.parser")
+    except requests.exceptions.HTTPError as exc:
+        if exc.response is not None and exc.response.status_code == 403:
+            print(f"    [ADB] 403 on page {page + 1}, retrying with Playwright…")
+            raw_html = scrape_with_playwright(url, wait_ms=3000)
+            return BeautifulSoup(raw_html, "html.parser")
+        print(f"    [!] ADB HTTP error page {page + 1}: {exc}")
+        return None
+    except Exception as exc:
+        print(f"    [!] ADB fetch error page {page + 1}: {exc}")
+        return None
+
+
+_ADB_QUAL_HEADING = re.compile(r"qualif|requirement|education|experience", re.I)
+
+
+def _fetch_adb_detail(url: str) -> dict:
+    """Fetch one ADB job page and extract grade, department, location, experience."""
+    try:
+        r = requests.get(url, headers=_ADB_HEADERS, timeout=20, allow_redirects=True)
+        if r.status_code == 403:
+            raise requests.exceptions.HTTPError(response=r)
+        r.raise_for_status()
+        soup = BeautifulSoup(r.text, "html.parser")
+    except requests.exceptions.HTTPError as exc:
+        if exc.response is not None and exc.response.status_code == 403:
+            soup = BeautifulSoup(scrape_with_playwright(url, wait_ms=3000), "html.parser")
+        else:
+            return {}
+    except Exception:
+        return {}
+
+    # Field extraction tries three HTML patterns in order:
+    # 1. Drupal field__label / field__item divs
+    # 2. <dt> / <dd> definition lists
+    # 3. table <th> or <strong> next to a <td>
+    def _get(soup, *labels) -> str:
+        pats = [re.compile(lbl, re.I) for lbl in labels]
+
+        for pat in pats:
+            el = soup.find(class_=re.compile(r"field__label"), string=pat)
+            if el:
+                item = el.find_next_sibling(class_=re.compile(r"field__item"))
+                if item:
+                    return clean(item.get_text())
+
+        for dt in soup.find_all("dt"):
+            if any(p.search(dt.get_text()) for p in pats):
+                dd = dt.find_next_sibling("dd")
+                if dd:
+                    return clean(dd.get_text())
+
+        for cell in soup.find_all(["th", "td", "strong", "b"]):
+            if any(p.search(cell.get_text()) for p in pats):
+                nxt = cell.find_next_sibling("td")
+                if not nxt:
+                    row = cell.find_parent("tr")
+                    nxt = row.find("td") if row else None
+                if nxt and nxt is not cell:
+                    return clean(nxt.get_text())
+
+        return ""
+
+    result: dict = {
+        "grade":      _get(soup, "Position Level", "Grade", "Salary Level")[:40],
+        "department": _get(soup, "Division", "Department", "Organizational Unit")[:80],
+        "location":   _get(soup, r"\bLocation\b", "Duty Station")[:60],
+    }
+
+    # Qualifications / Requirements section: collect text after the matching heading
+    for heading in soup.find_all(["h2", "h3", "h4", "strong", "b"]):
+        if not _ADB_QUAL_HEADING.search(heading.get_text()):
+            continue
+        parts: list[str] = []
+        for sib in heading.next_siblings:
+            if getattr(sib, "name", None) in ("h2", "h3", "h4"):
+                break
+            text = clean(sib.get_text(" ") if hasattr(sib, "get_text") else str(sib))
+            if text:
+                parts.append(text)
+            if sum(len(p) for p in parts) > 300:
+                break
+        full = clean(" ".join(parts))
+        if len(full) > 20:
+            result["experience"] = full[:200] + ("…" if len(full) > 200 else "")
+            break
+
+    return result
+
+
+def scrape_adb() -> list:
+    """Scrape ADB current opportunities with pagination, enriching each job with detail page data."""
+    jobs: list = []
+    page = 0
+
+    while True:
+        soup = _fetch_adb_page(page)
+        if not soup:
+            break
+        page_jobs = _parse_adb_page(soup)
+        if not page_jobs:
+            break
+        jobs.extend(page_jobs)
+        print(f"    Page {page + 1}: {len(page_jobs)} jobs")
+        page += 1
+        time.sleep(1)
+
+    print(f"  Fetching detail pages for {len(jobs)} ADB job(s)…")
+    for job in jobs:
+        detail = _fetch_adb_detail(job["url"])
+        if detail.get("grade"):
+            job["grade"]      = detail["grade"]
+            job["entry_level"] = infer_entry_level(job["title"], detail["grade"])
+        if detail.get("department"):
+            job["department"]          = detail["department"]
+            job["role_specialisation"] = detail["department"]
+        if detail.get("location"):
+            job["location"] = detail["location"]
+        if detail.get("experience"):
+            job["experience"] = detail["experience"]
+        time.sleep(0.5)
+
+    print(f"  ADB jobs found: {len(jobs)} across {page} page(s)")
     return jobs
 
 
@@ -502,6 +1247,11 @@ def generate_report(jobs: list) -> None:
 
         url = esc(job.get("url") or "#")
 
+        exp_html = ""
+        experience = job.get("experience", "")
+        if experience:
+            exp_html = f'<div class="jex">{esc(experience)}</div>'
+
         return (
             f'<div class="jc"'
             f' data-source="{esc(job.get("source",""))}"'
@@ -514,6 +1264,7 @@ def generate_report(jobs: list) -> None:
             f'<div class="jh">{"".join(badges)}</div>'
             f'<div class="jti">{esc(job["title"])}</div>'
             f'<div class="jin">{esc(job["institution"])}</div>'
+            f'{exp_html}'
             f'<div class="sp"></div>'
             f'<div class="mg">{meta_rows}</div>'
             f'{extra}{tags_html}'
@@ -596,7 +1347,8 @@ body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
 
 /* ── Title / institution ── */
 .jti{{font-size:1.05rem;font-weight:700;color:#111827;line-height:1.3;margin-bottom:.18rem}}
-.jin{{font-size:.83rem;font-weight:600;color:#2563eb;margin-bottom:.75rem}}
+.jin{{font-size:.83rem;font-weight:600;color:#2563eb;margin-bottom:.3rem}}
+.jex{{font-size:.78rem;color:#6b7280;line-height:1.4;margin-bottom:.65rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
 
 /* ── Separator ── */
 .sp{{height:1px;background:#f3f4f6;margin-bottom:.7rem}}
@@ -875,11 +1627,35 @@ def main() -> None:
     ecb_jobs = scrape_ecb()
     print(f"  Raw jobs found: {len(ecb_jobs)}")
 
-    print("\nScraping EuroBrussels (eurobrussels.com/job_search)...")
-    eb_jobs = scrape_eurobrussels()
-    print(f"  Raw jobs found: {len(eb_jobs)}")
+    print("\nScraping EEAS (eeas.europa.eu/eeas/vacancies_en)...")
+    eeas_jobs = scrape_eeas()
+    print(f"  Raw jobs found: {len(eeas_jobs)}")
 
-    jobs = process(ecb_jobs + eb_jobs, previous, keywords)
+    print("\nScraping Bruegel (bruegel.org/careers)...")
+    bruegel_jobs = scrape_bruegel()
+
+    print("\nScraping EU Commission (eu-careers.europa.eu)...")
+    ec_jobs = scrape_eu_commission()
+
+    print("\nScraping EU Parliament (apply4ep.gestmax.eu)...")
+    ep_jobs = scrape_eu_parliament()
+
+    print("\nScraping EU Council (talents.coe.int)...")
+    council_jobs = scrape_eu_council()
+
+    print("\nScraping EIB (erecruitment.eib.org feed)...")
+    eib_jobs = scrape_eib()
+
+    print("\nScraping OECD (careers.smartrecruiters.com/OECD)...")
+    oecd_jobs = scrape_oecd()
+
+    print("\nScraping AIIB (aiib.org/en/opportunities/career)...")
+    aiib_jobs = scrape_aiib()
+
+    print("\nScraping ADB (adb.org/work-with-us/careers)...")
+    adb_jobs = scrape_adb()
+
+    jobs = process(ecb_jobs + eeas_jobs + bruegel_jobs + ec_jobs + ep_jobs + council_jobs + eib_jobs + oecd_jobs + aiib_jobs + adb_jobs, previous, keywords)
     save(jobs)
 
     print_summary(jobs, time.perf_counter() - t0)
