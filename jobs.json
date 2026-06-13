@@ -21,7 +21,8 @@
     "source": "ECB Direct",
     "id": "5f32347e8ab7d480",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -46,7 +47,8 @@
     "source": "ECB Direct",
     "id": "796d606d948f2270",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -71,7 +73,8 @@
     "source": "ECB Direct",
     "id": "390905cca1915818",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -96,7 +99,8 @@
     "source": "ECB Direct",
     "id": "b3c0fbc11b992ff5",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -121,7 +125,8 @@
     "source": "ECB Direct",
     "id": "5273808885fa5f28",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -146,82 +151,8 @@
     "source": "ECB Direct",
     "id": "9965bcd30e43a209",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
-    "keyword_match": false
-  },
-  {
-    "title": "Research Assistant on Energy and Climate",
-    "institution": "Bruegel",
-    "department": "",
-    "location": "Brussels, Belgium",
-    "deadline": "Deadline for applications: Sunday 28 June 2026, 23:59 CEST",
-    "posted": "",
-    "contract_type": "",
-    "who_can_apply": "",
-    "salary": "",
-    "grade": "",
-    "working_time": "",
-    "role_specialisation": "",
-    "prerequisites": "",
-    "experience": "",
-    "tags": [],
-    "description": "",
-    "entry_level": "Professional",
-    "url": "https://www.bruegel.orghttps://www.bruegel.org/careers/research-assistant-energy-and-climate-0",
-    "source": "Bruegel",
-    "id": "834aac1faf55a666",
-    "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
-    "keyword_match": false
-  },
-  {
-    "title": "Project Assistant",
-    "institution": "Bruegel",
-    "department": "",
-    "location": "Brussels, Belgium",
-    "deadline": "Deadline for applications: Sunday 28 June 2026, 23:59 CEST",
-    "posted": "",
-    "contract_type": "",
-    "who_can_apply": "",
-    "salary": "",
-    "grade": "",
-    "working_time": "",
-    "role_specialisation": "",
-    "prerequisites": "",
-    "experience": "",
-    "tags": [],
-    "description": "",
-    "entry_level": "Professional",
-    "url": "https://www.bruegel.orghttps://www.bruegel.org/careers/project-assistant",
-    "source": "Bruegel",
-    "id": "3f579ea7c726ccfe",
-    "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
-    "keyword_match": false
-  },
-  {
-    "title": "Visiting Fellowships",
-    "institution": "Bruegel",
-    "department": "",
-    "location": "Brussels, Belgium",
-    "deadline": "open call on a rolling basis",
-    "posted": "",
-    "contract_type": "",
-    "who_can_apply": "",
-    "salary": "",
-    "grade": "",
-    "working_time": "",
-    "role_specialisation": "",
-    "prerequisites": "",
-    "experience": "",
-    "tags": [],
-    "description": "",
-    "entry_level": "Professional",
-    "url": "https://www.bruegel.orghttps://www.bruegel.org/about/careers/visiting-fellowships",
-    "source": "Bruegel",
-    "id": "c591507005da79d1",
-    "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -246,7 +177,8 @@
     "source": "EU Commission",
     "id": "1b599038e3c653a0",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -271,7 +203,8 @@
     "source": "EU Commission",
     "id": "699bc9afdc591a3e",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -296,7 +229,8 @@
     "source": "EU Commission",
     "id": "c9ef023e5ab5ffc9",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -321,7 +255,8 @@
     "source": "EU Commission",
     "id": "f3d3f795a0a57a4f",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -346,7 +281,8 @@
     "source": "EU Commission",
     "id": "5fd7ea92b9bf1a6b",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -371,7 +307,8 @@
     "source": "EU Commission",
     "id": "bbe57a1d52a3427c",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -396,7 +333,8 @@
     "source": "EU Commission",
     "id": "1c7e1b732f96cb7a",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -421,7 +359,8 @@
     "source": "EU Commission",
     "id": "e563942d9181be49",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -446,7 +385,8 @@
     "source": "EU Commission",
     "id": "16f0647ad3be90eb",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -471,7 +411,8 @@
     "source": "EU Commission",
     "id": "0bf6bdf9ff1c3e13",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -496,7 +437,8 @@
     "source": "EU Commission",
     "id": "e5d87e388b782cc6",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -521,7 +463,8 @@
     "source": "EU Commission",
     "id": "5808945908e20973",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -546,7 +489,8 @@
     "source": "EU Commission",
     "id": "5b36487fe59111aa",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -571,7 +515,8 @@
     "source": "EU Commission",
     "id": "49d5187d778ff1bf",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -596,7 +541,8 @@
     "source": "EU Commission",
     "id": "2117bb1cdea09f5d",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -621,7 +567,8 @@
     "source": "EU Commission",
     "id": "4d72ca8c4339d200",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -646,7 +593,8 @@
     "source": "EU Commission",
     "id": "780107104361214d",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -671,7 +619,8 @@
     "source": "EU Commission",
     "id": "1a968b4e5dcfc4f4",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -696,7 +645,8 @@
     "source": "EU Commission",
     "id": "01ebe50ce3e500b9",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -721,7 +671,8 @@
     "source": "EU Commission",
     "id": "ad4644d80567d565",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -746,7 +697,8 @@
     "source": "EU Commission",
     "id": "e2528366fc2f5c33",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -771,7 +723,8 @@
     "source": "EU Commission",
     "id": "bbd3089c6486c61c",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -796,7 +749,8 @@
     "source": "EU Commission",
     "id": "f45bc02c9c1a17b1",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -821,7 +775,8 @@
     "source": "EU Commission",
     "id": "6cdc7164765a6c1b",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -846,7 +801,8 @@
     "source": "EU Commission",
     "id": "59ffa2640beca482",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -871,7 +827,8 @@
     "source": "EU Commission",
     "id": "48ab20db0d41a1fd",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -896,7 +853,8 @@
     "source": "EU Commission",
     "id": "5085bcb2e4000184",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -921,7 +879,8 @@
     "source": "EU Commission",
     "id": "eadc7b370d6c47b8",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -946,7 +905,8 @@
     "source": "EU Commission",
     "id": "b1c9bd80901b20aa",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -971,7 +931,8 @@
     "source": "EU Commission",
     "id": "2fa6bbad84b8ba54",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -996,7 +957,8 @@
     "source": "EU Commission",
     "id": "7c06d6ee313328d2",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -1021,7 +983,8 @@
     "source": "EU Commission",
     "id": "cf015809ace1bd77",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -1046,7 +1009,8 @@
     "source": "EU Commission",
     "id": "eedbecef64d91ef6",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -1071,7 +1035,8 @@
     "source": "EU Commission",
     "id": "a9f7565d10e6b398",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -1096,7 +1061,8 @@
     "source": "EU Commission",
     "id": "4e33577f8a19e828",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -1121,7 +1087,8 @@
     "source": "EU Commission",
     "id": "7c4eb68f4fe6f064",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -1146,7 +1113,8 @@
     "source": "EU Commission",
     "id": "4db544da6f60e358",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -1171,7 +1139,8 @@
     "source": "EU Commission",
     "id": "52e9aba18f8f72c0",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -1196,7 +1165,8 @@
     "source": "EU Commission",
     "id": "3242f11c79cf8400",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -1221,7 +1191,8 @@
     "source": "EU Commission",
     "id": "1160f97157aa6b00",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -1246,7 +1217,8 @@
     "source": "EU Commission",
     "id": "6916cff03c510163",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -1271,7 +1243,8 @@
     "source": "EU Commission",
     "id": "d7be98ec904e5e0c",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -1296,7 +1269,8 @@
     "source": "EU Commission",
     "id": "20809b7584e45666",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -1321,7 +1295,8 @@
     "source": "EU Council",
     "id": "b75511adb7e6457b",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -1346,7 +1321,8 @@
     "source": "EU Council",
     "id": "aec3cedce8029008",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -1371,7 +1347,8 @@
     "source": "EU Council",
     "id": "7ab246ce342e5c05",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -1396,7 +1373,8 @@
     "source": "EU Council",
     "id": "4934323cb97d2534",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -1421,7 +1399,8 @@
     "source": "EU Council",
     "id": "b14a4619ec8701a4",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -1446,7 +1425,8 @@
     "source": "EU Council",
     "id": "a75ba5245355e686",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -1471,7 +1451,8 @@
     "source": "EU Council",
     "id": "62677111aaf86e78",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -1496,7 +1477,8 @@
     "source": "EU Council",
     "id": "31589c29ba743751",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -1521,7 +1503,8 @@
     "source": "EU Council",
     "id": "cc2e5968bef691c4",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -1546,7 +1529,8 @@
     "source": "EU Council",
     "id": "28375f61b57256f7",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -1571,7 +1555,8 @@
     "source": "EU Council",
     "id": "a530661f591c0018",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -1596,7 +1581,8 @@
     "source": "EIB",
     "id": "e23973d2bb0cc168",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -1621,7 +1607,8 @@
     "source": "EIB",
     "id": "3040a1808a268f2c",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -1646,7 +1633,8 @@
     "source": "EIB",
     "id": "b7b0d41640dcd626",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -1671,7 +1659,8 @@
     "source": "EIB",
     "id": "c862ac3bae5600ea",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -1696,7 +1685,8 @@
     "source": "EIB",
     "id": "1bc5594ef3520e5d",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -1721,7 +1711,8 @@
     "source": "EIB",
     "id": "e0e9a8d5fe5efefb",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -1746,7 +1737,8 @@
     "source": "EIB",
     "id": "7a5b4f5529de9092",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -1771,7 +1763,8 @@
     "source": "EIB",
     "id": "11bd0ff211668545",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -1796,7 +1789,8 @@
     "source": "EIB",
     "id": "b4180f76f3d01f5e",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -1821,7 +1815,8 @@
     "source": "EIB",
     "id": "8ccafa23589860cd",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -1846,7 +1841,8 @@
     "source": "EIB",
     "id": "af356119a771c5ce",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -1871,7 +1867,8 @@
     "source": "EIB",
     "id": "edc37f69a3fcd42d",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -1896,7 +1893,8 @@
     "source": "EIB",
     "id": "33f63f5cb271898f",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -1921,7 +1919,8 @@
     "source": "EIB",
     "id": "9fdc5e8d37744ce3",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -1946,7 +1945,8 @@
     "source": "EIB",
     "id": "f668f6dc31870aae",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -1971,7 +1971,8 @@
     "source": "EIB",
     "id": "2ba97c206bf8cab1",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -1996,7 +1997,8 @@
     "source": "EIB",
     "id": "1f7aabddb766db2c",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2021,7 +2023,8 @@
     "source": "EIB",
     "id": "01c19ba4aaca1f8e",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2046,7 +2049,8 @@
     "source": "EIB",
     "id": "82ebef3da166b3fe",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -2071,7 +2075,8 @@
     "source": "EIB",
     "id": "c218b84db207e436",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -2096,7 +2101,8 @@
     "source": "EIB",
     "id": "1a137e59a1802e2c",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2121,7 +2127,8 @@
     "source": "EIB",
     "id": "ab8c2da43719dd93",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2146,7 +2153,8 @@
     "source": "EIB",
     "id": "819d5934412dded7",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2171,7 +2179,8 @@
     "source": "OECD",
     "id": "b90b485151fbc19e",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2196,7 +2205,8 @@
     "source": "OECD",
     "id": "5c236179b2c70dd9",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -2221,7 +2231,8 @@
     "source": "OECD",
     "id": "2908a4739d1788cf",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2246,7 +2257,8 @@
     "source": "OECD",
     "id": "6d7837e957f79f4c",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2271,7 +2283,8 @@
     "source": "OECD",
     "id": "02e74313e8ed2efd",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2296,7 +2309,8 @@
     "source": "OECD",
     "id": "317dd539a40b6d1d",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2321,7 +2335,8 @@
     "source": "OECD",
     "id": "7fdc481fb3fcbfe0",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2346,7 +2361,8 @@
     "source": "OECD",
     "id": "925dc565f63a3569",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2371,7 +2387,8 @@
     "source": "OECD",
     "id": "033b9c5f0c66220d",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2396,7 +2413,8 @@
     "source": "OECD",
     "id": "19d3d8249944aa80",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -2421,7 +2439,8 @@
     "source": "AIIB",
     "id": "7c479629ab08c571",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2446,7 +2465,8 @@
     "source": "AIIB",
     "id": "230ab40fdab04a5a",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2471,7 +2491,8 @@
     "source": "AIIB",
     "id": "dbb4e62b2f0e0c4f",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2496,7 +2517,8 @@
     "source": "AIIB",
     "id": "97dbf6d0971003f5",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -2521,7 +2543,8 @@
     "source": "AIIB",
     "id": "0f9c2b0d973a498a",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2546,7 +2569,8 @@
     "source": "AIIB",
     "id": "2372eaec6f2f73c3",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2571,7 +2595,8 @@
     "source": "AIIB",
     "id": "fc214af679ae9289",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2596,7 +2621,8 @@
     "source": "AIIB",
     "id": "92d57a346d819cb7",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2621,7 +2647,8 @@
     "source": "AIIB",
     "id": "8ba3fc6fa9ecff6f",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -2646,7 +2673,8 @@
     "source": "AIIB",
     "id": "e464538b4e778d2b",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2671,7 +2699,8 @@
     "source": "ADB",
     "id": "ac510e3bd73cc52a",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2696,7 +2725,8 @@
     "source": "ADB",
     "id": "53f0082bf3989748",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -2721,7 +2751,8 @@
     "source": "ADB",
     "id": "afb13f7d0701f0f9",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2746,7 +2777,8 @@
     "source": "ADB",
     "id": "a943fe28cdf95a86",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2771,7 +2803,8 @@
     "source": "ADB",
     "id": "77aa1594bf2948c6",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2796,7 +2829,8 @@
     "source": "ADB",
     "id": "44a116d5d860659d",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2821,7 +2855,8 @@
     "source": "ADB",
     "id": "da0dd2fef11b25bf",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2846,7 +2881,8 @@
     "source": "ADB",
     "id": "984c02c30a1f42aa",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2871,7 +2907,8 @@
     "source": "ADB",
     "id": "2fec8b3dc8318a15",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2896,7 +2933,8 @@
     "source": "ADB",
     "id": "dd0e2fdf9c7523d7",
     "is_new": false,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2920,8 +2958,9 @@
     "url": "https://www.adb.org/careers/260583",
     "source": "ADB",
     "id": "1c2619ffe6d01e60",
-    "is_new": true,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "is_new": false,
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2945,8 +2984,9 @@
     "url": "https://www.adb.org/careers/260602",
     "source": "ADB",
     "id": "52a2228587dabf6f",
-    "is_new": true,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "is_new": false,
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2970,8 +3010,9 @@
     "url": "https://www.adb.org/careers/260601",
     "source": "ADB",
     "id": "b9c30d2fe7b16fee",
-    "is_new": true,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "is_new": false,
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -2995,8 +3036,9 @@
     "url": "https://www.adb.org/careers/260384",
     "source": "ADB",
     "id": "ce234ac212fad50a",
-    "is_new": true,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "is_new": false,
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -3020,8 +3062,9 @@
     "url": "https://www.adb.org/careers/260563",
     "source": "ADB",
     "id": "38ebdebd037d445b",
-    "is_new": true,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "is_new": false,
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -3045,8 +3088,9 @@
     "url": "https://www.adb.org/careers/260564",
     "source": "ADB",
     "id": "c9af2220a909a70f",
-    "is_new": true,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "is_new": false,
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -3070,8 +3114,9 @@
     "url": "https://www.adb.org/careers/260568",
     "source": "ADB",
     "id": "7c7c58201c27d311",
-    "is_new": true,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "is_new": false,
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -3095,8 +3140,9 @@
     "url": "https://www.adb.org/careers/260495",
     "source": "ADB",
     "id": "4de672134966b614",
-    "is_new": true,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "is_new": false,
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -3120,8 +3166,9 @@
     "url": "https://www.adb.org/careers/260535",
     "source": "ADB",
     "id": "78559d97261f9cdf",
-    "is_new": true,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "is_new": false,
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -3145,8 +3192,9 @@
     "url": "https://www.adb.org/careers/260619",
     "source": "ADB",
     "id": "0170ad50911cf781",
-    "is_new": true,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "is_new": false,
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -3170,8 +3218,9 @@
     "url": "https://www.adb.org/careers/260596",
     "source": "ADB",
     "id": "5fa3e2cc03ca3697",
-    "is_new": true,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "is_new": false,
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -3195,8 +3244,9 @@
     "url": "https://www.adb.org/careers/260610",
     "source": "ADB",
     "id": "6a1a111f9cfdd190",
-    "is_new": true,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "is_new": false,
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": true,
     "keyword_match": false
   },
   {
@@ -3220,8 +3270,9 @@
     "url": "https://www.adb.org/careers/260567",
     "source": "ADB",
     "id": "327648e2e356ab9d",
-    "is_new": true,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "is_new": false,
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -3245,8 +3296,9 @@
     "url": "https://www.adb.org/careers/260611",
     "source": "ADB",
     "id": "6c7ff5872abe916c",
-    "is_new": true,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "is_new": false,
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -3270,8 +3322,9 @@
     "url": "https://www.adb.org/careers/260612",
     "source": "ADB",
     "id": "da2e5b3cd431ee42",
-    "is_new": true,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "is_new": false,
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -3295,8 +3348,9 @@
     "url": "https://www.adb.org/careers/260598",
     "source": "ADB",
     "id": "efb9d4608a26d418",
-    "is_new": true,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "is_new": false,
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -3320,8 +3374,9 @@
     "url": "https://www.adb.org/careers/260565",
     "source": "ADB",
     "id": "48b400646d3d0a12",
-    "is_new": true,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "is_new": false,
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   },
   {
@@ -3345,8 +3400,9 @@
     "url": "https://www.adb.org/careers/260590",
     "source": "ADB",
     "id": "f34a6f6c0ee1d3c4",
-    "is_new": true,
-    "scraped_at": "2026-06-13T16:50:06.111442+00:00",
+    "is_new": false,
+    "scraped_at": "2026-06-13T17:36:00.388731+00:00",
+    "alejandra_pick": false,
     "keyword_match": false
   }
 ]
